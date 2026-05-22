@@ -1,0 +1,10 @@
+export const BRAND_NAME = 'Mulify'
+export const BRAND_DOMAIN = 'mulify.co'
+export const BRAND_EMAIL = `hello@${BRAND_DOMAIN}`
+export const BRAND_ADMIN_EMAIL = `admin@${BRAND_DOMAIN}`
+export const BRAND_PRIVACY_EMAIL = `privacy@${BRAND_DOMAIN}`
+export const BRAND_KVKK_EMAIL = `kvkk@${BRAND_DOMAIN}`
+export const BRAND_REMOTE_NAME = `${BRAND_NAME} Remote`
+export const BRAND_COOKIE_KEY = 'mulify_cookie_consent'
+export const BRAND_CACHE_KEY = 'mulify-remote-v1'
+export const BRAND_LOGO_URL = 'https://www.mulify.co/favicon.ico'

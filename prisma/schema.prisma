@@ -1,0 +1,169 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Service {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  titleTr     String
+  titleEn     String
+  descTr      String    @db.Text
+  descEn      String    @db.Text
+  icon        String?
+  image       String?
+  order       Int       @default(0)
+  featured    Boolean   @default(false)
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  projects    Project[]
+}
+
+model Project {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  titleTr     String
+  titleEn     String
+  descTr      String    @db.Text
+  descEn      String    @db.Text
+  client      String?
+  url         String?
+  image       String?
+  images      String[]
+  tags        String[]
+  featured    Boolean   @default(false)
+  published   Boolean   @default(true)
+  order       Int       @default(0)
+  serviceId   String?
+  service     Service?  @relation(fields: [serviceId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Post {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  titleTr     String
+  titleEn     String
+  excerptTr   String?   @db.Text
+  excerptEn   String?   @db.Text
+  contentTr   String    @db.Text
+  contentEn   String    @db.Text
+  coverImage  String?
+  tags        String[]
+  published   Boolean   @default(false)
+  publishedAt DateTime?
+  authorId    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Page {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  titleTr     String
+  titleEn     String
+  contentTr   String   @db.Text
+  contentEn   String   @db.Text
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  type      String   @default("text")
+  group     String   @default("general")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  service   String?
+  message   String   @db.Text
+  budget    String?
+  status    String   @default("new")
+  source    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PricingPlan {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  nameTr      String
+  nameEn      String
+  descTr      String?  @db.Text
+  descEn      String?  @db.Text
+  price       Float
+  currency    String   @default("USD")
+  period      String   @default("month")
+  features    String[]
+  ctaText     String?
+  highlighted Boolean  @default(false)
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  nameTr    String
+  nameEn    String
+  roleTr    String?
+  roleEn    String?
+  company   String?
+  contentTr String   @db.Text
+  contentEn String   @db.Text
+  avatar    String?
+  rating    Int      @default(5)
+  featured  Boolean  @default(false)
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  nameTr    String
+  nameEn    String
+  roleTr    String
+  roleEn    String
+  bioTr     String?  @db.Text
+  bioEn     String?  @db.Text
+  avatar    String?
+  linkedin  String?
+  twitter   String?
+  github    String?
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FAQ {
+  id          String   @id @default(cuid())
+  questionTr  String
+  questionEn  String
+  answerTr    String   @db.Text
+  answerEn    String   @db.Text
+  category    String?
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

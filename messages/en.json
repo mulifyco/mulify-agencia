@@ -1,0 +1,98 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "work": "Work",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "getQuote": "Get a Quote"
+  },
+  "hero": {
+    "badge": "Digital Agency",
+    "title": "We Elevate Your Brand",
+    "titleHighlight": "to Digital Heights",
+    "description": "Combining strategy, design, and technology to make your brand stand out in the digital world.",
+    "cta": "Start Your Project",
+    "ctaSecondary": "View Our Work",
+    "scrollDown": "Scroll Down"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Complete solutions for your digital success",
+    "items": {
+      "webDesign": {
+        "title": "Web Design",
+        "desc": "Aesthetic and functional websites that prioritize user experience"
+      },
+      "branding": {
+        "title": "Brand Identity",
+        "desc": "Powerful visual identity systems that define your brand"
+      },
+      "digitalMarketing": {
+        "title": "Digital Marketing",
+        "desc": "Growth through SEO, social media, and content strategies"
+      },
+      "development": {
+        "title": "Web Development",
+        "desc": "Performant, scalable, and secure web applications"
+      }
+    }
+  },
+  "work": {
+    "title": "Selected Projects",
+    "subtitle": "Digital experiences we created together with our clients",
+    "viewAll": "View All Projects",
+    "viewProject": "View Project"
+  },
+  "about": {
+    "title": "Who We Are",
+    "subtitle": "A team combining creativity and technology",
+    "description": "At Mulify, we pride ourselves on being reliable partners in brands' digital transformation journeys.",
+    "stats": {
+      "projects": "Completed Projects",
+      "clients": "Happy Clients",
+      "years": "Years Experience",
+      "awards": "Awards"
+    }
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "subtitle": "Our success stories in their words"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "subtitle": "Packages tailored to your needs",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us"
+  },
+  "contact": {
+    "title": "Let's Talk About Your Project",
+    "subtitle": "Let's create your dream digital experience together",
+    "form": {
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company",
+      "service": "Service",
+      "budget": "Budget",
+      "message": "Your Message",
+      "submit": "Send",
+      "sending": "Sending...",
+      "success": "Your message has been sent!",
+      "error": "Something went wrong."
+    }
+  },
+  "footer": {
+    "description": "A creative agency that empowers your brand in the digital world.",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to your questions"
+  }
+}

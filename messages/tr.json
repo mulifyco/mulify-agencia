@@ -1,0 +1,98 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "services": "Hizmetler",
+    "work": "Çalışmalar",
+    "about": "Hakkımızda",
+    "blog": "Blog",
+    "contact": "İletişim",
+    "getQuote": "Teklif Al"
+  },
+  "hero": {
+    "badge": "Dijital Ajans",
+    "title": "Markani Dijitalde",
+    "titleHighlight": "Zirveye Taşıyoruz",
+    "description": "Strateji, tasarım ve teknolojiyi birleştirerek markanızı dijital dünyada öne çıkarıyoruz.",
+    "cta": "Projenizi Başlatın",
+    "ctaSecondary": "Çalışmalarımızı Görün",
+    "scrollDown": "Aşağı Kaydır"
+  },
+  "services": {
+    "title": "Hizmetlerimiz",
+    "subtitle": "Dijital başarınız için eksiksiz çözümler",
+    "items": {
+      "webDesign": {
+        "title": "Web Tasarım",
+        "desc": "Kullanıcı deneyimini ön planda tutan, estetik ve işlevsel web siteleri"
+      },
+      "branding": {
+        "title": "Marka Kimliği",
+        "desc": "Markanızı tanımlayan güçlü görsel kimlik sistemleri"
+      },
+      "digitalMarketing": {
+        "title": "Dijital Pazarlama",
+        "desc": "SEO, sosyal medya ve içerik stratejileriyle büyüme"
+      },
+      "development": {
+        "title": "Web Geliştirme",
+        "desc": "Performanslı, ölçeklenebilir ve güvenli web uygulamaları"
+      }
+    }
+  },
+  "work": {
+    "title": "Seçili Projeler",
+    "subtitle": "Müşterilerimizle birlikte yarattığımız dijital deneyimler",
+    "viewAll": "Tüm Projeleri Gör",
+    "viewProject": "Projeyi İncele"
+  },
+  "about": {
+    "title": "Biz Kimiz",
+    "subtitle": "Yaratıcılık ve teknolojiyi birleştiren ekip",
+    "description": "Mulify olarak, markaların dijital dönüşüm yolculuğunda güvenilir partnerleri olmaktan gurur duyuyoruz.",
+    "stats": {
+      "projects": "Tamamlanan Proje",
+      "clients": "Mutlu Müşteri",
+      "years": "Yıllık Deneyim",
+      "awards": "Ödül"
+    }
+  },
+  "testimonials": {
+    "title": "Müşterilerimiz Ne Diyor",
+    "subtitle": "Başarı hikayelerimiz onların sözleriyle"
+  },
+  "pricing": {
+    "title": "Fiyatlandırma",
+    "subtitle": "İhtiyacınıza uygun paketler",
+    "monthly": "Aylık",
+    "yearly": "Yıllık",
+    "getStarted": "Başlayın",
+    "contactUs": "Bize Ulaşın"
+  },
+  "contact": {
+    "title": "Projenizi Konuşalım",
+    "subtitle": "Hayalinizdeki dijital deneyimi birlikte yaratalım",
+    "form": {
+      "name": "Ad Soyad",
+      "email": "E-posta",
+      "phone": "Telefon",
+      "company": "Şirket",
+      "service": "Hizmet",
+      "budget": "Bütçe",
+      "message": "Mesajınız",
+      "submit": "Gönder",
+      "sending": "Gönderiliyor...",
+      "success": "Mesajınız gönderildi!",
+      "error": "Bir hata oluştu."
+    }
+  },
+  "footer": {
+    "description": "Dijital dünyada markanızı güçlendiren yaratıcı ajans.",
+    "rights": "Tüm hakları saklıdır.",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Kullanım Koşulları"
+  },
+  "faq": {
+    "title": "Sık Sorulan Sorular",
+    "subtitle": "Merak ettiklerinizin cevapları"
+  }
+}
