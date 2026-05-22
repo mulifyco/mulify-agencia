@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import { localizedPath } from '@/lib/locale-path'
 import { motion, useInView } from 'framer-motion'
 import { ArrowLeft, ArrowRight, Calendar, Clock, Tag, Link2 } from 'lucide-react'
 
@@ -104,7 +105,7 @@ export default function BlogPostClient({ locale, post, related }: { locale: stri
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           {/* Back */}
           <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-            <Link href={`/${locale}/blog`} className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-[#F5A623] transition-colors mb-10 group">
+            <Link href={localizedPath(locale, '/blog')} className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-[#F5A623] transition-colors mb-10 group">
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               Blog
             </Link>
@@ -252,7 +253,7 @@ export default function BlogPostClient({ locale, post, related }: { locale: stri
               className="flex items-center justify-between mb-10"
             >
               <h2 className="font-playfair text-2xl font-bold text-white">{isTr ? 'İlgili Yazılar' : 'Related Posts'}</h2>
-              <Link href={`/${locale}/blog`} className="text-sm text-[#F5A623] hover:text-[#FFD166] flex items-center gap-1.5 transition-colors">
+              <Link href={localizedPath(locale, '/blog')} className="text-sm text-[#F5A623] hover:text-[#FFD166] flex items-center gap-1.5 transition-colors">
                 {isTr ? 'Tümünü Gör' : 'View All'} <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
@@ -263,7 +264,7 @@ export default function BlogPostClient({ locale, post, related }: { locale: stri
                   initial={{ opacity: 0, y: 30 }} animate={isRelatedInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: i * 0.1 }}
                 >
-                  <Link href={`/${locale}/blog/${rel.slug}`} className="group block glass rounded-2xl overflow-hidden hover:border-[#F5A623]/30 transition-all h-full">
+                  <Link href={localizedPath(locale, `/blog/${rel.slug}`)} className="group block glass rounded-2xl overflow-hidden hover:border-[#F5A623]/30 transition-all h-full">
                     <div className={`aspect-video relative overflow-hidden bg-gradient-to-br ${GRADIENTS[i % 3]} flex items-center justify-center`}>
                       {rel.coverImage ? (
                         <img src={rel.coverImage} alt={isTr ? rel.titleTr : rel.titleEn} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -299,7 +300,7 @@ export default function BlogPostClient({ locale, post, related }: { locale: stri
             <h2 className="font-playfair text-2xl font-bold text-white mb-1">{isTr ? 'Projenizi tartışalım' : "Let's talk about your project"}</h2>
             <p className="text-white/40 text-sm">{isTr ? 'Bu yazı ilginizi çektiyse, sizin için neler yapabileceğimize bakalım.' : "If this post caught your eye, let's see what we can build together."}</p>
           </div>
-          <Link href={`/${locale}/iletisim`} className="flex-shrink-0 flex items-center gap-2 px-8 py-3.5 bg-[#F5A623] text-[#0A0A0F] font-semibold rounded-xl hover:bg-[#FFD166] transition-all">
+          <Link href={localizedPath(locale, '/iletisim')} className="flex-shrink-0 flex items-center gap-2 px-8 py-3.5 bg-[#F5A623] text-[#0A0A0F] font-semibold rounded-xl hover:bg-[#FFD166] transition-all">
             {isTr ? 'Teklif Al' : 'Get Quote'} <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
+import { localizedPath } from '@/lib/locale-path'
 
 interface Section {
   id: string
@@ -65,7 +66,7 @@ export default function LegalContent({
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-xs text-white/30 mb-6">
-            <Link href={`/${locale}`} className="hover:text-white/60 transition-colors">
+            <Link href={localizedPath(locale, '/')} className="hover:text-white/60 transition-colors">
               {isTr ? 'Ana Sayfa' : 'Home'}
             </Link>
             <ChevronRight className="w-3 h-3" />

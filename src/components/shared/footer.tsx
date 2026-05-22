@@ -6,6 +6,7 @@ import { motion, useInView } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { X, ArrowRight, Mail, MapPin, Phone } from 'lucide-react'
 import { BRAND_EMAIL, BRAND_LOGO_URL, BRAND_NAME } from '@/lib/brand'
+import { localizedPath } from '@/lib/locale-path'
 
 const LinkedinIcon = () => (
   <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg">
@@ -165,7 +166,7 @@ export default function Footer() {
             className="lg:col-span-2"
           >
             {/* Logo */}
-            <Link href={`/${locale}`} className="flex items-center gap-3 mb-6">
+            <Link href={localizedPath(locale, '/')} className="flex items-center gap-3 mb-6">
               <div className="relative w-9 h-9">
                 <div className="absolute inset-0 bg-[#F5A623] rounded-xl rotate-45" />
                 <div className="absolute inset-[3px] bg-[#0A0A0F] rounded-lg rotate-45" />
@@ -230,7 +231,7 @@ export default function Footer() {
                 {col.links.map((link) => (
                   <li key={link.href}>
                     <Link
-                      href={`/${locale}${link.href}`}
+                      href={localizedPath(locale, link.href)}
                       className="text-sm text-white/50 hover:text-[#F5A623] transition-colors duration-200"
                     >
                       {isTr ? link.labelTr : link.labelEn}

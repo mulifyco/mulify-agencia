@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import Link from 'next/link'
+import { localizedPath } from '@/lib/locale-path'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import type { Project } from '@/lib/db-types'
@@ -35,7 +36,7 @@ function ProjectCard({ project, index, locale }: { project: Project; index: numb
       transition={{ duration: 0.7, delay: (index % 3) * 0.12, ease: [0.22, 1, 0.36, 1] }}
       className="group"
     >
-      <Link href={`/${locale}/projeler/${project.slug}`} className="block">
+      <Link href={localizedPath(locale, `/projeler/${project.slug}`)} className="block">
         {/* Image area */}
         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4">
           {project.image ? (
@@ -204,7 +205,7 @@ export default function ProjectsListClient({ locale, projects }: { locale: strin
             <h2 className="font-playfair text-2xl font-bold text-white mb-1">{isTr ? 'Projenizi hayata geçirelim' : "Let's bring your project to life"}</h2>
             <p className="text-white/40 text-sm">{isTr ? 'Benzer bir proje için bizimle iletişime geçin.' : 'Contact us for a similar project.'}</p>
           </div>
-          <Link href={`/${locale}/iletisim`} className="flex-shrink-0 flex items-center gap-2 px-8 py-3.5 bg-[#F5A623] text-[#0A0A0F] font-semibold rounded-xl hover:bg-[#FFD166] transition-all">
+          <Link href={localizedPath(locale, '/iletisim')} className="flex-shrink-0 flex items-center gap-2 px-8 py-3.5 bg-[#F5A623] text-[#0A0A0F] font-semibold rounded-xl hover:bg-[#FFD166] transition-all">
             {isTr ? 'Teklif Al' : 'Get Quote'} <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

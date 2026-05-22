@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { Cookie, X } from 'lucide-react'
+import { localizedPath } from '@/lib/locale-path'
 
 const CONSENT_KEY = 'mulify_cookie_consent'
 
@@ -43,10 +44,10 @@ export default function CookieBanner() {
                   <p className="text-xs text-white/45 leading-relaxed">
                     {isTr ? (
                       <>Deneyiminizi iyileştirmek için çerezler kullanıyoruz.{' '}
-                        <Link href={`/${locale}/cerez-politikasi`} className="text-[#F5A623] hover:underline">Çerez politikamızı</Link> inceleyebilirsiniz.</>
+                        <Link href={localizedPath(locale, '/cerez-politikasi')} className="text-[#F5A623] hover:underline">Çerez politikamızı</Link> inceleyebilirsiniz.</>
                     ) : (
                       <>We use cookies to improve your experience. View our{' '}
-                        <Link href={`/${locale}/cerez-politikasi`} className="text-[#F5A623] hover:underline">cookie policy</Link>.</>
+                        <Link href={localizedPath(locale, '/cerez-politikasi')} className="text-[#F5A623] hover:underline">cookie policy</Link>.</>
                     )}
                   </p>
                 </div>

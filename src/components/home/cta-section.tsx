@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { ArrowRight, CheckCircle2, Clock, Shield } from 'lucide-react'
+import { localizedPath } from '@/lib/locale-path'
 
 const trustBadges = [
   { icon: CheckCircle2, labelTr: '100+ Başarılı Proje', labelEn: '100+ Successful Projects' },
@@ -108,14 +109,14 @@ export default function CTASection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
           <Link
-            href={`/${locale}/iletisim`}
+            href={localizedPath(locale, '/iletisim')}
             className="group flex items-center gap-3 px-8 py-4 bg-[#F5A623] text-[#0A0A0F] font-semibold rounded-2xl text-base hover:bg-[#FFD166] transition-all duration-300 animate-pulse-amber"
           >
             {isTr ? 'Hemen Başlayın' : 'Get Started Now'}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link
-            href={`/${locale}/projeler`}
+            href={localizedPath(locale, '/projeler')}
             className="flex items-center gap-2 px-8 py-4 glass border border-white/10 text-white font-semibold rounded-2xl text-base hover:border-[#F5A623]/30 transition-all duration-300"
           >
             {isTr ? 'Portfolyoyu İncele' : 'View Portfolio'}

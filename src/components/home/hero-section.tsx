@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
+import { localizedPath } from '@/lib/locale-path'
 import { motion } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { ArrowRight, ChevronLeft, ChevronRight, Play, TrendingUp } from 'lucide-react'
@@ -486,14 +487,14 @@ export default function HeroSection() {
                         className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
                       >
                         <Link
-                          href={`/${locale}/iletisim`}
+                          href={localizedPath(locale, '/iletisim')}
                           className="group flex items-center gap-3 px-7 py-3.5 bg-[#F5A623] text-[#0A0A0F] font-semibold rounded-2xl text-sm hover:bg-[#FFD166] transition-all duration-300 animate-pulse-amber"
                         >
                           {isTr ? 'Projenizi Başlatın' : 'Start Your Project'}
                           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </Link>
                         <Link
-                          href={`/${locale}/projeler`}
+                          href={localizedPath(locale, '/projeler')}
                           className="group flex items-center gap-3 px-7 py-3.5 glass border border-white/10 text-white font-semibold rounded-2xl text-sm hover:border-[#F5A623]/30 hover:bg-[#F5A623]/5 transition-all duration-300"
                         >
                           <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#F5A623]/20 transition-colors">

@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import Link from 'next/link'
+import { localizedPath } from '@/lib/locale-path'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { ArrowRight, Calendar, Clock, Search, Tag } from 'lucide-react'
 import type { Post } from '@/lib/db-types'
@@ -67,7 +68,7 @@ function PostCard({ post, index, locale }: { post: Post; index: number; locale: 
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: (index % 3) * 0.1, ease: [0.22, 1, 0.36, 1] as any }}
     >
-      <Link href={`/${locale}/blog/${post.slug}`} className="group block glass rounded-2xl overflow-hidden hover:border-[#F5A623]/30 transition-all duration-300 h-full">
+      <Link href={localizedPath(locale, `/blog/${post.slug}`)} className="group block glass rounded-2xl overflow-hidden hover:border-[#F5A623]/30 transition-all duration-300 h-full">
         {/* Image */}
         <div className={`aspect-video relative overflow-hidden bg-gradient-to-br ${GRADIENTS[index % 4]} flex items-center justify-center`}>
           {post.coverImage ? (
@@ -241,7 +242,7 @@ export default function BlogListClient({ locale, posts }: { locale: string; post
                     transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as any }}
                     className="mb-10"
                   >
-                    <Link href={`/${locale}/blog/${featured.slug}`} className="group block glass rounded-2xl overflow-hidden hover:border-[#F5A623]/30 transition-all duration-300">
+                    <Link href={localizedPath(locale, `/blog/${featured.slug}`)} className="group block glass rounded-2xl overflow-hidden hover:border-[#F5A623]/30 transition-all duration-300">
                       <div className="grid lg:grid-cols-[1.2fr_1fr] gap-0">
                         <div className={`aspect-video lg:aspect-auto min-h-[280px] relative overflow-hidden bg-gradient-to-br ${GRADIENTS[0]} flex items-center justify-center`}>
                           {featured.coverImage ? (
@@ -307,7 +308,7 @@ export default function BlogListClient({ locale, posts }: { locale: string; post
             <p className="text-white/40 text-sm mb-8">
               {isTr ? 'İçeriklerimiz ilginizi çektiyse, sizin için neler yapabileceğimize bakalım.' : "If our content caught your attention, let's see what we can do for you."}
             </p>
-            <Link href={`/${locale}/iletisim`} className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#F5A623] text-[#0A0A0F] font-semibold rounded-xl hover:bg-[#FFD166] transition-all">
+            <Link href={localizedPath(locale, '/iletisim')} className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#F5A623] text-[#0A0A0F] font-semibold rounded-xl hover:bg-[#FFD166] transition-all">
               {isTr ? 'Teklif Al' : 'Get Quote'} <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>

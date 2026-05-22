@@ -80,7 +80,7 @@ const CONTENT_TR = `
     <li><strong>Pazarlama çerezleri:</strong> Kişiselleştirilmiş reklamlar sunmak için kullanılır (açık rızanız dahilinde).</li>
     <li><strong>Tercih çerezleri:</strong> Dil ve tema tercihlerinizi hatırlamak için kullanılır.</li>
   </ul>
-  <p>Tarayıcı ayarlarınızdan çerezleri devre dışı bırakabilirsiniz, ancak bu durumda bazı site özellikleri çalışmayabilir. Ayrıntılı bilgi için <a href="/tr/cerez-politikasi">Çerez Politikamızı</a> inceleyiniz.</p>
+  <p>Tarayıcı ayarlarınızdan çerezleri devre dışı bırakabilirsiniz, ancak bu durumda bazı site özellikleri çalışmayabilir. Ayrıntılı bilgi için <a href="/cerez-politikasi">Çerez Politikamızı</a> inceleyiniz.</p>
 </section>
 
 <section id="ucuncu-taraflar">
@@ -185,7 +185,7 @@ const CONTENT_EN = `
     <li><strong>Marketing cookies:</strong> Used to deliver personalized ads (with your explicit consent).</li>
     <li><strong>Preference cookies:</strong> Used to remember your language and theme preferences.</li>
   </ul>
-  <p>You can disable cookies in your browser settings, though some site features may not function properly. For more detail, see our <a href="/en/cerez-politikasi">Cookie Policy</a>.</p>
+  <p>You can disable cookies in your browser settings, though some site features may not function properly. For more detail, see our <a href="/cerez-politikasi">Cookie Policy</a>.</p>
 </section>
 
 <section id="ucuncu-taraflar">

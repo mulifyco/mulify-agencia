@@ -86,7 +86,7 @@ const CONTENT_TR = `
 <section id="gizlilik">
   <h2>Gizlilik</h2>
   <p>Kişisel verilerinizi Gizlilik Politikamız doğrultusunda işliyoruz. Proje sürecinde paylaşılan iş bilgileri gizli tutulur ve üçüncü taraflarla paylaşılmaz.</p>
-  <p>Projenizle ilgili NDA (Gizlilik Sözleşmesi) talep etmeniz durumunda ayrı bir sözleşme düzenlenebilir. Ayrıntılı bilgi için <a href="/tr/gizlilik">Gizlilik Politikamızı</a> inceleyiniz.</p>
+  <p>Projenizle ilgili NDA (Gizlilik Sözleşmesi) talep etmeniz durumunda ayrı bir sözleşme düzenlenebilir. Ayrıntılı bilgi için <a href="/gizlilik">Gizlilik Politikamızı</a> inceleyiniz.</p>
 </section>
 
 <section id="sorumluluk-reddi">
@@ -122,7 +122,7 @@ const CONTENT_TR = `
     <li>İstanbul Merkez (Çağlayan) Mahkemeleri ve İcra Müdürlükleri yetkilidir.</li>
     <li>Yargıya başvurmadan önce İstanbul Ticaret Odası tahkimi tercih edilebilir.</li>
   </ul>
-  <p>Sorularınız için <a href="/tr/iletisim">iletişim sayfamızı</a> ziyaret edebilirsiniz.</p>
+  <p>Sorularınız için <a href="/iletisim">iletişim sayfamızı</a> ziyaret edebilirsiniz.</p>
 </section>
 `
 
@@ -182,7 +182,7 @@ const CONTENT_EN = `
 <section id="gizlilik">
   <h2>Privacy</h2>
   <p>We process your personal data in accordance with our Privacy Policy. Business information shared during the project is kept confidential and not shared with third parties.</p>
-  <p>If you require an NDA (Non-Disclosure Agreement) for your project, a separate agreement can be arranged. For details, see our <a href="/en/gizlilik">Privacy Policy</a>.</p>
+  <p>If you require an NDA (Non-Disclosure Agreement) for your project, a separate agreement can be arranged. For details, see our <a href="/gizlilik">Privacy Policy</a>.</p>
 </section>
 
 <section id="sorumluluk-reddi">
@@ -218,7 +218,7 @@ const CONTENT_EN = `
     <li>Istanbul Central (Çağlayan) Courts and Enforcement Offices have jurisdiction.</li>
     <li>Istanbul Chamber of Commerce arbitration may be preferred before judicial proceedings.</li>
   </ul>
-  <p>For questions, visit our <a href="/en/iletisim">contact page</a>.</p>
+  <p>For questions, visit our <a href="/iletisim">contact page</a>.</p>
 </section>
 `
 

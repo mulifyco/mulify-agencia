@@ -2,12 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { BRAND_LOGO_URL, BRAND_NAME } from '@/lib/brand'
+import { localizedPath } from '@/lib/locale-path'
 import {
-  Globe,
   Palette,
   Code2,
   TrendingUp,
@@ -55,8 +54,6 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const locale = useLocale()
-  const router = useRouter()
-  const pathname = usePathname()
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -84,13 +81,6 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
-  const toggleLocale = () => {
-    const newLocale = locale === 'tr' ? 'en' : 'tr'
-    const segments = pathname.split('/')
-    segments[1] = newLocale
-    router.push(segments.join('/'))
-  }
-
   return (
     <>
       <motion.header
@@ -106,7 +96,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link href={`/${locale}`} className="flex items-center gap-3 group">
+            <Link href={localizedPath(locale, '/')} className="flex items-center gap-3 group">
               <div className="relative w-9 h-9">
                 <div className="absolute inset-0 bg-[#F5A623] rounded-xl rotate-45 group-hover:rotate-[60deg] transition-transform duration-500" />
                 <div className="absolute inset-[3px] bg-[#0A0A0F] rounded-lg rotate-45" />
@@ -148,7 +138,7 @@ export default function Navbar() {
                             {serviceItems.map((item) => (
                               <Link
                                 key={item.href}
-                                href={`/${locale}${item.href}`}
+                                href={localizedPath(locale, item.href)}
                                 onClick={() => setServicesOpen(false)}
                                 className="flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-all duration-200 group/item"
                               >
@@ -170,7 +160,7 @@ export default function Navbar() {
                           </div>
                           <div className="mt-2 pt-2 border-t border-white/5 px-3">
                             <Link
-                              href={`/${locale}/hizmetler`}
+                              href={localizedPath(locale, '/hizmetler')}
                               className="text-xs text-[#F5A623] hover:text-[#FFD166] transition-colors flex items-center gap-1"
                               onClick={() => setServicesOpen(false)}
                             >
@@ -185,7 +175,7 @@ export default function Navbar() {
                 ) : (
                   <Link
                     key={link.href}
-                    href={`/${locale}${link.href === '/' ? '' : link.href}`}
+                    href={localizedPath(locale, link.href)}
                     className="px-4 py-2 text-sm text-white/70 hover:text-white transition-colors duration-200 rounded-xl hover:bg-white/5"
                   >
                     {locale === 'tr' ? link.labelTr : link.labelEn}
@@ -194,22 +184,9 @@ export default function Navbar() {
               )}
             </nav>
 
-            {/* Right: Locale + CTA */}
             <div className="hidden lg:flex items-center gap-3">
-              {/* Locale Toggle */}
-              <button
-                onClick={toggleLocale}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-[#F5A623]/30 hover:bg-[#F5A623]/5 transition-all duration-200"
-              >
-                <Globe className="w-3.5 h-3.5 text-white/50" />
-                <span className="text-xs font-medium text-white/70 uppercase tracking-wide">
-                  {locale === 'tr' ? 'EN' : 'TR'}
-                </span>
-              </button>
-
-              {/* CTA */}
               <Link
-                href={`/${locale}/iletisim`}
+                href={localizedPath(locale, '/iletisim')}
                 className="relative flex items-center gap-2 px-5 py-2.5 bg-[#F5A623] text-[#0A0A0F] text-sm font-semibold rounded-xl hover:bg-[#FFD166] transition-all duration-300 animate-pulse-amber overflow-hidden group"
               >
                 <span className="relative z-10">{locale === 'tr' ? 'Teklif Al' : 'Get Quote'}</span>
@@ -243,7 +220,7 @@ export default function Navbar() {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 h-20 border-b border-white/5">
-              <Link href={`/${locale}`} className="flex items-center gap-3" onClick={() => setMobileOpen(false)}>
+              <Link href={localizedPath(locale, '/')} className="flex items-center gap-3" onClick={() => setMobileOpen(false)}>
                 <div className="relative w-9 h-9">
                   <div className="absolute inset-0 bg-[#F5A623] rounded-xl rotate-45" />
                   <div className="absolute inset-[3px] bg-[#0A0A0F] rounded-lg rotate-45" />
@@ -272,7 +249,7 @@ export default function Navbar() {
               {navLinks.map((link, i) => (
                 <motion.div key={link.href} variants={staggerItem}>
                   <Link
-                    href={`/${locale}${link.href === '/' ? '' : link.href}`}
+                    href={localizedPath(locale, link.href)}
                     onClick={() => setMobileOpen(false)}
                     className="flex items-center justify-between py-4 border-b border-white/5 group"
                   >
@@ -288,17 +265,10 @@ export default function Navbar() {
             {/* Bottom */}
             <motion.div
               variants={staggerItem}
-              className="px-6 py-8 flex items-center justify-between border-t border-white/5"
+              className="px-6 py-8 flex items-center justify-end border-t border-white/5"
             >
-              <button
-                onClick={() => { toggleLocale(); setMobileOpen(false) }}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10"
-              >
-                <Globe className="w-4 h-4 text-white/50" />
-                <span className="text-sm font-medium text-white/70 uppercase">{locale === 'tr' ? 'English' : 'Türkçe'}</span>
-              </button>
               <Link
-                href={`/${locale}/iletisim`}
+                href={localizedPath(locale, '/iletisim')}
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-2 px-6 py-3 bg-[#F5A623] text-[#0A0A0F] text-sm font-semibold rounded-xl"
               >

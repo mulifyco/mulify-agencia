@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
+import { localizedPath } from '@/lib/locale-path'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight, Target, Lightbulb, Heart, Zap, Users, Award, TrendingUp, Globe } from 'lucide-react'
 
@@ -270,7 +271,7 @@ export default function AboutClient({ locale, members }: { locale: string; membe
             <p className="text-white/50 mb-8">
               {isTr ? 'Fikrinizi bizimle paylaşın. Birlikte büyüyelim.' : 'Share your idea with us. Let\'s grow together.'}
             </p>
-            <Link href={`/${locale}/iletisim`} className="inline-flex items-center gap-2 px-10 py-4 bg-[#F5A623] text-[#0A0A0F] font-bold rounded-xl hover:bg-[#FFD166] transition-all text-base">
+            <Link href={localizedPath(locale, '/iletisim')} className="inline-flex items-center gap-2 px-10 py-4 bg-[#F5A623] text-[#0A0A0F] font-bold rounded-xl hover:bg-[#FFD166] transition-all text-base">
               {isTr ? 'İletişime Geç' : 'Get in Touch'}
               <ArrowRight className="w-5 h-5" />
             </Link>

@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
+import { localizedPath } from '@/lib/locale-path'
 import { motion, useInView } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { Check, ArrowRight, Zap, Loader2 } from 'lucide-react'
@@ -214,7 +215,7 @@ export default function PricingSection() {
 
                     {/* CTA */}
                     <Link
-                      href={`/${locale}/iletisim`}
+                      href={localizedPath(locale, '/iletisim')}
                       className={`flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
                         plan.highlighted
                           ? 'bg-[#F5A623] text-[#0A0A0F] hover:bg-[#FFD166]'

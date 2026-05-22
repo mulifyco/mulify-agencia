@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import { localizedPath } from '@/lib/locale-path'
 import { motion, useInView } from 'framer-motion'
 import { ArrowLeft, ArrowRight, ExternalLink, Tag, Calendar, User, TrendingUp } from 'lucide-react'
 import type { Project } from '@/lib/db-types'
@@ -58,7 +59,7 @@ export default function ProjectDetailClient({
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-            <Link href={`/${locale}/projeler`} className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-[#F5A623] transition-colors mb-12 group">
+            <Link href={localizedPath(locale, '/projeler')} className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-[#F5A623] transition-colors mb-12 group">
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               {isTr ? 'Tüm Projeler' : 'All Projects'}
             </Link>
@@ -223,7 +224,7 @@ export default function ProjectDetailClient({
               className="flex items-center justify-between mb-10"
             >
               <h2 className="font-playfair text-2xl font-bold text-white">{isTr ? 'Benzer Projeler' : 'Similar Projects'}</h2>
-              <Link href={`/${locale}/projeler`} className="text-sm text-[#F5A623] hover:text-[#FFD166] flex items-center gap-1.5 transition-colors">
+              <Link href={localizedPath(locale, '/projeler')} className="text-sm text-[#F5A623] hover:text-[#FFD166] flex items-center gap-1.5 transition-colors">
                 {isTr ? 'Tümünü Gör' : 'View All'} <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
@@ -234,7 +235,7 @@ export default function ProjectDetailClient({
                   initial={{ opacity: 0, y: 30 }} animate={isRelatedInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: i * 0.1 }}
                 >
-                  <Link href={`/${locale}/projeler/${rel.slug}`} className="group block">
+                  <Link href={localizedPath(locale, `/projeler/${rel.slug}`)} className="group block">
                     <div className={`aspect-video rounded-2xl overflow-hidden mb-4 bg-gradient-to-br ${GRADIENT_MAP[i] ?? GRADIENT_MAP[0]} flex items-center justify-center relative`}>
                       {rel.image && <img src={rel.image} alt={isTr ? rel.titleTr : rel.titleEn} className="w-full h-full object-cover" />}
                       {!rel.image && <span className="text-4xl opacity-20">✦</span>}
@@ -261,7 +262,7 @@ export default function ProjectDetailClient({
             <h2 className="font-playfair text-2xl font-bold text-white mb-1">{isTr ? 'Benzer bir proje mi istiyorsunuz?' : 'Want a similar project?'}</h2>
             <p className="text-white/40 text-sm">{isTr ? 'Projenizi bizimle paylaşın.' : 'Share your project with us.'}</p>
           </div>
-          <Link href={`/${locale}/iletisim`} className="flex-shrink-0 flex items-center gap-2 px-8 py-3.5 bg-[#F5A623] text-[#0A0A0F] font-semibold rounded-xl hover:bg-[#FFD166] transition-all">
+          <Link href={localizedPath(locale, '/iletisim')} className="flex-shrink-0 flex items-center gap-2 px-8 py-3.5 bg-[#F5A623] text-[#0A0A0F] font-semibold rounded-xl hover:bg-[#FFD166] transition-all">
             {isTr ? 'Teklif Al' : 'Get Quote'} <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

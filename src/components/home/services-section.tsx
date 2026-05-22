@@ -2,6 +2,7 @@
 
 import { useRef, useCallback } from 'react'
 import Link from 'next/link'
+import { localizedPath } from '@/lib/locale-path'
 import { motion, useInView } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -169,7 +170,7 @@ export default function ServicesSection() {
 
                 {/* CTA */}
                 <Link
-                  href={`/${locale}${service.slug ? `/hizmetler/${service.slug}` : '/hizmetler'}`}
+                  href={localizedPath(locale, service.slug ? `/hizmetler/${service.slug}` : '/hizmetler')}
                   className="flex items-center gap-2 text-sm font-semibold group/link"
                   style={{ color: service.featured ? '#F5A623' : service.color }}
                 >
@@ -188,7 +189,7 @@ export default function ServicesSection() {
             className="flex-none w-[220px]"
           >
             <Link
-              href={`/${locale}/hizmetler`}
+              href={localizedPath(locale, '/hizmetler')}
               className="h-full rounded-3xl border border-dashed border-white/10 flex flex-col items-center justify-center gap-4 p-8 hover:border-[#F5A623]/30 hover:bg-[#F5A623]/3 transition-all duration-300 group min-h-[400px]"
             >
               <div className="w-12 h-12 rounded-2xl bg-[#F5A623]/10 flex items-center justify-center group-hover:bg-[#F5A623]/20 transition-colors">

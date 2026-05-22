@@ -3,6 +3,7 @@
 import { useRef, useCallback, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { localizedPath } from '@/lib/locale-path'
 import { motion, useInView } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -143,7 +144,7 @@ export default function FeaturedProjects() {
                       {isTr ? project.titleTr : project.titleEn}
                     </h3>
                     <Link
-                      href={`/${locale}/projeler/${project.slug}`}
+                      href={localizedPath(locale, `/projeler/${project.slug}`)}
                       className="flex items-center gap-2 px-5 py-2.5 bg-[#F5A623] text-[#0A0A0F] text-sm font-semibold rounded-xl hover:bg-[#FFD166] transition-colors"
                     >
                       {isTr ? 'İncele' : 'View Project'}
@@ -178,7 +179,7 @@ export default function FeaturedProjects() {
           {/* View all card */}
           <div className="flex-none w-[200px] flex items-stretch">
             <Link
-              href={`/${locale}/projeler`}
+              href={localizedPath(locale, '/projeler')}
               className="flex-1 rounded-3xl border border-dashed border-white/10 flex flex-col items-center justify-center gap-3 p-8 hover:border-[#F5A623]/30 hover:bg-[#F5A623]/3 transition-all group"
             >
               <div className="w-10 h-10 rounded-2xl bg-[#F5A623]/10 flex items-center justify-center group-hover:bg-[#F5A623]/20 transition-colors">

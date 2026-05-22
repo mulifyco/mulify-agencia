@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import { localizedPath } from '@/lib/locale-path'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight, ArrowLeft, Check, Palette, Code2, TrendingUp, ShoppingCart, Sparkles, Layers, Search, BarChart, Zap, MessageSquare } from 'lucide-react'
 import type { Service } from '@/lib/db-types'
@@ -105,7 +106,7 @@ export default function ServiceDetailClient({
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div {...fi(0)}>
-            <Link href={`/${locale}/hizmetler`} className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-[#F5A623] transition-colors mb-12 group">
+            <Link href={localizedPath(locale, '/hizmetler')} className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-[#F5A623] transition-colors mb-12 group">
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               {isTr ? 'Tüm Hizmetler' : 'All Services'}
             </Link>
@@ -134,14 +135,14 @@ export default function ServiceDetailClient({
 
               <motion.div {...fi(0.25)} className="flex flex-wrap gap-3">
                 <Link
-                  href={`/${locale}/iletisim`}
+                  href={localizedPath(locale, '/iletisim')}
                   className="inline-flex items-center gap-2 px-8 py-4 text-[#0A0A0F] font-semibold rounded-xl transition-all hover:gap-3"
                   style={{ background: color }}
                 >
                   {isTr ? 'Bu Hizmet İçin Teklif Al' : 'Get Quote for This Service'}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-                <Link href={`/${locale}/iletisim`} className="inline-flex items-center gap-2 px-8 py-4 glass rounded-xl text-white text-sm font-medium hover:bg-white/8 transition-all">
+                <Link href={localizedPath(locale, '/iletisim')} className="inline-flex items-center gap-2 px-8 py-4 glass rounded-xl text-white text-sm font-medium hover:bg-white/8 transition-all">
                   <MessageSquare className="w-4 h-4" />
                   {isTr ? 'Soru Sor' : 'Ask a Question'}
                 </Link>
@@ -249,7 +250,7 @@ export default function ServiceDetailClient({
                     initial={{ opacity: 0, y: 30 }} animate={isRelatedInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6, delay: i * 0.1 }}
                   >
-                    <Link href={`/${locale}/hizmetler/${rel.slug}`} className="group block glass rounded-2xl p-6 hover:border-white/15 transition-all">
+                    <Link href={localizedPath(locale, `/hizmetler/${rel.slug}`)} className="group block glass rounded-2xl p-6 hover:border-white/15 transition-all">
                       <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style={{ background: `${relColor}15` }}>
                         <RelIcon className="w-5 h-5" style={{ color: relColor }} />
                       </div>
@@ -290,7 +291,7 @@ export default function ServiceDetailClient({
               {isTr ? 'Projenizi bizimle paylaşın, 24 saat içinde size özel teklif hazırlayalım.' : 'Share your project with us and we\'ll prepare a custom quote within 24 hours.'}
             </p>
             <Link
-              href={`/${locale}/iletisim`}
+              href={localizedPath(locale, '/iletisim')}
               className="inline-flex items-center gap-2 px-10 py-4 text-[#0A0A0F] font-bold rounded-xl transition-all text-base hover:gap-3"
               style={{ background: color }}
             >

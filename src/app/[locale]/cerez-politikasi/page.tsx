@@ -101,7 +101,7 @@ const CONTENT_TR = `
         <tr>
           <td><code>locale</code></td>
           <td>Tercih</td>
-          <td>Dil tercihinizi hatırlar (tr/en)</td>
+          <td>Türkçe site tercihlerinizi hatırlar</td>
           <td>1 yıl</td>
         </tr>
       </tbody>
@@ -225,7 +225,7 @@ const CONTENT_EN = `
         <tr>
           <td><code>locale</code></td>
           <td>Preference</td>
-          <td>Remembers your language preference (tr/en)</td>
+          <td>Remembers your Turkish site preference</td>
           <td>1 year</td>
         </tr>
       </tbody>

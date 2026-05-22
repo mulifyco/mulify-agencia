@@ -8,6 +8,13 @@ const intlMiddleware = createIntlMiddleware(routing)
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  if (pathname === '/en' || pathname.startsWith('/en/') || pathname === '/tr' || pathname.startsWith('/tr/')) {
+    const strippedPath = pathname.replace(/^\/(en|tr)(?=\/|$)/, '') || '/'
+    const url = request.nextUrl.clone()
+    url.pathname = strippedPath
+    return NextResponse.redirect(url)
+  }
+
   if (pathname.startsWith('/admin')) {
     // Login and auth callback are always public
     if (pathname === '/admin/login' || pathname.startsWith('/admin/auth/')) {
@@ -46,7 +53,7 @@ export async function middleware(request: NextRequest) {
     return response
   }
 
-  // next-intl handles all locale routes
+  // next-intl rewrites public routes to the default locale internally
   return intlMiddleware(request)
 }
 

@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import { localizedPath } from '@/lib/locale-path'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight, Check, Palette, Code2, TrendingUp, ShoppingCart, Sparkles, Layers } from 'lucide-react'
 import type { Service } from '@/lib/db-types'
@@ -125,7 +126,7 @@ function ServiceCard({ service, index, locale }: { service: Service; index: numb
 
           {/* CTA */}
           <Link
-            href={`/${locale}/hizmetler/${service.slug}`}
+            href={localizedPath(locale, `/hizmetler/${service.slug}`)}
             className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-300 group-hover:gap-3"
             style={{ color }}
           >
@@ -236,7 +237,7 @@ export default function ServicesListClient({ locale, services }: { locale: strin
             <div className="inline-flex flex-col items-center gap-4 glass rounded-2xl px-12 py-10">
               <p className="text-white/60 text-sm">{isTr ? 'İhtiyacınıza özel çözüm mü arıyorsunuz?' : 'Looking for a custom solution?'}</p>
               <Link
-                href={`/${locale}/iletisim`}
+                href={localizedPath(locale, '/iletisim')}
                 className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#F5A623] text-[#0A0A0F] font-semibold rounded-xl hover:bg-[#FFD166] transition-all hover:gap-3"
               >
                 {isTr ? 'Ücretsiz Danışmanlık Al' : 'Get Free Consultation'}
