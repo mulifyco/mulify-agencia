@@ -26,6 +26,9 @@ export default function RemoteLayout({ children }: { children: React.ReactNode }
   return (
     <html lang="tr" className={inter.variable}>
       <body className="font-inter antialiased bg-[#0A0A0F] text-white overflow-hidden touch-manipulation">
+        <noscript><img height="1" width="1" style={{ display: 'none' }}
+        src="https://www.facebook.com/tr?id=4290380164439424&ev=PageView&noscript=1"
+        /></noscript>
         <div className="flex flex-col h-dvh overflow-hidden">
           <main className="flex-1 overflow-hidden relative">{children}</main>
           <BottomNav />

@@ -60,6 +60,9 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
       <body className="font-inter antialiased bg-[#0A0A0F] text-white overflow-x-hidden">
+        <noscript><img height="1" width="1" style={{ display: 'none' }}
+        src="https://www.facebook.com/tr?id=4290380164439424&ev=PageView&noscript=1"
+        /></noscript>
         <NextIntlClientProvider messages={messages}>
           {children}
           <CookieBanner />
