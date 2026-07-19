@@ -158,3 +158,97 @@ export type SiteSetting = {
   createdAt: string
   updatedAt: string
 }
+
+// Public theme-site records used by the restored portfolio demos.
+export type ThemeSite = {
+  id: string
+  slug: string
+  name: string
+  theme: string
+  heroTitle: string | null
+  heroSubtitle: string | null
+  heroCtaText: string | null
+  heroImage: string | null
+  primaryColor: string
+  logo: string | null
+  aboutVizyon: string | null
+  aboutMisyon: string | null
+  contactEmail: string | null
+  contactPhone: string | null
+  contactAddress: string | null
+  contactMapUrl: string | null
+  cuisineType: string | null
+  openingHours: string | null
+  reservationEmail: string | null
+  workingHours: string | null
+  appointmentEmail: string | null
+  licenseNo: string | null
+  metaTitle: string | null
+  metaDesc: string | null
+  published: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export type ThemeMenuItem = {
+  id: string
+  siteId: string
+  category: string
+  name: string
+  description: string | null
+  price: number
+  currency: string
+  image: string | null
+  available: boolean
+  featured: boolean
+  order: number
+  createdAt: string
+  updatedAt: string
+}
+
+export type ThemeGallery = {
+  id: string
+  siteId: string
+  url: string
+  caption: string | null
+  order: number
+  createdAt: string
+}
+
+export type ThemePost = {
+  id: string
+  siteId: string
+  title: string
+  excerpt: string | null
+  content: string
+  coverImage: string | null
+  published: boolean
+  publishedAt: string | null
+  createdAt: string
+  updatedAt: string
+}
+
+export type ThemeTeamMember = {
+  id: string
+  siteId: string
+  name: string
+  role: string
+  bio: string | null
+  avatar: string | null
+  order: number
+  createdAt: string
+  updatedAt: string
+}
+
+export type ThemeDoctor = {
+  id: string
+  siteId: string
+  name: string
+  specialty: string
+  photo: string | null
+  bio: string | null
+  yearsExp: number
+  order: number
+  createdAt: string
+  updatedAt: string
+}

@@ -64,8 +64,8 @@ export default async function LocaleLayout({
         src="https://www.facebook.com/tr?id=4290380164439424&ev=PageView&noscript=1"
         /></noscript>
         <NextIntlClientProvider messages={messages}>
-          {children}
           <CookieBanner />
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>
