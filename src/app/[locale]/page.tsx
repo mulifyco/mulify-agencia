@@ -1,3 +1,4 @@
+import { createClient } from '@supabase/supabase-js'
 import Navbar from '@/components/shared/navbar'
 import HeroSection from '@/components/home/hero-section'
 import LogoMarquee from '@/components/home/logo-marquee'
@@ -10,8 +11,26 @@ import PricingSection from '@/components/home/pricing-section'
 import FAQSection from '@/components/home/faq-section'
 import CTASection from '@/components/home/cta-section'
 import Footer from '@/components/shared/footer'
+import type { Project } from '@/lib/db-types'
 
-export default function HomePage() {
+function db() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { persistSession: false, autoRefreshToken: false } }
+  )
+}
+
+export const dynamic = 'force-dynamic'
+
+export default async function HomePage() {
+  const { data: projects } = await db()
+    .from('Project')
+    .select('*')
+    .eq('published', true)
+    .order('order', { ascending: true })
+    .limit(6)
+
   return (
     <main>
       <Navbar />
@@ -20,7 +39,7 @@ export default function HomePage() {
       <StatsSection />
       <ServicesSection />
       <ValueProps />
-      <FeaturedProjects />
+      <FeaturedProjects projects={(projects ?? []) as Project[]} />
       <TestimonialsSection />
       <PricingSection />
       <FAQSection />

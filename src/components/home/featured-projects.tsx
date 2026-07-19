@@ -9,6 +9,7 @@ import { useLocale } from 'next-intl'
 import useEmblaCarousel from 'embla-carousel-react'
 import { ArrowRight, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
 import { mockProjects } from '@/lib/mock-data'
+import type { Project } from '@/lib/db-types'
 
 const filters = [
   { key: 'all', labelTr: 'Tümü', labelEn: 'All' },
@@ -17,16 +18,55 @@ const filters = [
   { key: 'E-Ticaret', labelTr: 'E-Ticaret', labelEn: 'E-Commerce' },
 ]
 
-export default function FeaturedProjects() {
+type FeaturedProject = {
+  id: string
+  slug: string
+  titleTr: string
+  titleEn: string
+  descriptionTr: string
+  descriptionEn: string
+  category: string
+  client: string | null
+  image: string | null
+  tags: string[]
+}
+
+function projectCategory(tags: string[]) {
+  const value = tags.join(' ').toLocaleLowerCase('tr-TR')
+  if (value.includes('sosyal') || value.includes('social')) return 'Sosyal Medya'
+  if (value.includes('ticaret') || value.includes('commerce') || value.includes('shopify')) return 'E-Ticaret'
+  return 'Web'
+}
+
+export default function FeaturedProjects({ projects }: { projects: Project[] }) {
   const locale = useLocale()
   const isTr = locale === 'tr'
   const headerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(headerRef, { once: true, margin: '-80px' })
   const [activeFilter, setActiveFilter] = useState('all')
 
+  const featuredProjects: FeaturedProject[] = projects.length > 0
+    ? projects.slice(0, 6).map((project) => ({
+        id: project.id,
+        slug: project.slug,
+        titleTr: project.titleTr,
+        titleEn: project.titleEn,
+        descriptionTr: project.descTr,
+        descriptionEn: project.descEn,
+        category: projectCategory(project.tags ?? []),
+        client: project.client,
+        image: project.image,
+        tags: project.tags ?? [],
+      }))
+    : mockProjects.slice(0, 6).map((project) => ({
+        ...project,
+        descriptionTr: '',
+        descriptionEn: '',
+      }))
+
   const filtered = activeFilter === 'all'
-    ? mockProjects
-    : mockProjects.filter((p) => p.category === activeFilter)
+    ? featuredProjects
+    : featuredProjects.filter((p) => p.category === activeFilter)
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
@@ -130,14 +170,16 @@ export default function FeaturedProjects() {
               <div className="group relative rounded-3xl overflow-hidden cursor-grab active:cursor-grabbing">
                 {/* Image */}
                 <div className="relative h-64 md:h-72 overflow-hidden bg-[#1C1C28]">
-                  <Image
-                    src={project.image}
-                    alt={isTr ? project.titleTr : project.titleEn}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="420px"
-                    unoptimized
-                  />
+                  {project.image ? (
+                    <Image
+                      src={project.image}
+                      alt={isTr ? project.titleTr : project.titleEn}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="420px"
+                      unoptimized
+                    />
+                  ) : null}
                   {/* Hover overlay */}
                   <div className="absolute inset-0 bg-[#0A0A0F]/80 opacity-0 group-hover:opacity-100 transition-all duration-400 flex flex-col items-center justify-center gap-4">
                     <h3 className="font-playfair text-xl font-bold text-white text-center px-6">
