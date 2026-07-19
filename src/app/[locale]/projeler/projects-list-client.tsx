@@ -6,6 +6,11 @@ import { localizedPath } from '@/lib/locale-path'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import type { Project } from '@/lib/db-types'
+import {
+  PROJECT_SERVICE_CATEGORIES,
+  getProjectServiceCategory,
+  type ProjectServiceCategory,
+} from '@/lib/project-service-categories'
 
 const PLACEHOLDER: Project[] = [
   { id: '1', slug: 'moda-brand-redesign', titleTr: 'Moda Marka Yenileme', titleEn: 'Fashion Brand Redesign', descTr: 'Köklü bir moda markasının dijital kimliğini ve e-ticaret platformunu baştan tasarladık.', descEn: 'We redesigned the digital identity and e-commerce platform of an established fashion brand.', client: 'FashionCo TR', url: null, image: null, images: [], tags: ['UI/UX', 'E-Ticaret', 'Shopify'], featured: true, published: true, order: 0, serviceId: null, createdAt: '', updatedAt: '' },
@@ -97,10 +102,11 @@ export default function ProjectsListClient({ locale, projects }: { locale: strin
   const headerRef = useRef<HTMLDivElement>(null)
   const isHeaderInView = useInView(headerRef, { once: true, margin: '-80px' })
 
-  const allTags = Array.from(new Set(displayProjects.flatMap((p) => p.tags ?? [])))
-  const filters = [{ key: null, labelTr: 'Tümü', labelEn: 'All' }, ...allTags.map((t) => ({ key: t, labelTr: t, labelEn: t }))]
-  const [activeTag, setActiveTag] = useState<string | null>(null)
-  const filtered = activeTag ? displayProjects.filter((p) => p.tags?.includes(activeTag)) : displayProjects
+  const filters = [{ key: null, label: 'Tümü' }, ...PROJECT_SERVICE_CATEGORIES]
+  const [activeCategory, setActiveCategory] = useState<ProjectServiceCategory | null>(null)
+  const filtered = activeCategory
+    ? displayProjects.filter((project) => getProjectServiceCategory(project) === activeCategory)
+    : displayProjects
 
   return (
     <main className="bg-[#0A0A0F] min-h-screen">
@@ -162,14 +168,14 @@ export default function ProjectsListClient({ locale, projects }: { locale: strin
               {filters.map((f) => (
                 <button
                   key={f.key ?? 'all'}
-                  onClick={() => setActiveTag(f.key)}
+                  onClick={() => setActiveCategory(f.key)}
                   className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    activeTag === f.key
+                    activeCategory === f.key
                       ? 'bg-[#F5A623] text-[#0A0A0F]'
                       : 'glass text-white/60 hover:text-white hover:border-white/20'
                   }`}
                 >
-                  {isTr ? f.labelTr : f.labelEn}
+                  {f.label}
                 </button>
               ))}
             </motion.div>
@@ -183,10 +189,10 @@ export default function ProjectsListClient({ locale, projects }: { locale: strin
           <AnimatePresence mode="wait">
             {filtered.length === 0 ? (
               <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="text-center py-24 text-white/30">
-                {isTr ? 'Bu etiket için proje bulunamadı.' : 'No projects found for this filter.'}
+                Bu kategoride henüz yayınlanmış proje bulunmuyor.
               </motion.div>
             ) : (
-              <motion.div key={activeTag ?? 'all'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+              <motion.div key={activeCategory ?? 'all'} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {filtered.map((project, i) => (
                     <ProjectCard key={project.id} project={project} index={i} locale={locale} />
