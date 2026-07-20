@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { BRAND_LOGO_URL, BRAND_NAME } from '@/lib/brand'
 import { localizedPath } from '@/lib/locale-path'
+import { sortServicesByPriority } from '@/lib/service-order'
 import {
   Palette,
   Code2,
@@ -18,13 +19,13 @@ import {
   ArrowRight,
 } from 'lucide-react'
 
-const serviceItems = [
-  { icon: Palette, label: 'Web Tasarım / Web Design', desc: 'UI/UX & Marka', color: '#F5A623', href: '/hizmetler/web-tasarim' },
-  { icon: Code2, label: 'Web Geliştirme / Web Dev', desc: 'Next.js & React', color: '#6C63FF', href: '/hizmetler/web-gelistirme' },
-  { icon: TrendingUp, label: 'Dijital Pazarlama', desc: 'SEO & Growth', color: '#10B981', href: '/hizmetler/dijital-pazarlama' },
-  { icon: ShoppingCart, label: 'E-Ticaret', desc: 'Shopify & WooCommerce', color: '#06B6D4', href: '/hizmetler/e-ticaret' },
-  { icon: Sparkles, label: 'Marka Kimliği', desc: 'Logo & Brand', color: '#F472B6', href: '/hizmetler/marka-kimligi' },
-]
+const serviceItems = sortServicesByPriority([
+  { slug: 'web-tasarim', icon: Palette, label: 'Web Tasarım / Web Design', desc: 'UI/UX & Marka', color: '#F5A623', href: '/hizmetler/web-tasarim' },
+  { slug: 'web-gelistirme', icon: Code2, label: 'Web Geliştirme / Web Dev', desc: 'Next.js & React', color: '#6C63FF', href: '/hizmetler/web-gelistirme' },
+  { slug: 'dijital-pazarlama', icon: TrendingUp, label: 'Dijital Pazarlama', desc: 'SEO & Growth', color: '#10B981', href: '/hizmetler/dijital-pazarlama' },
+  { slug: 'e-ticaret', icon: ShoppingCart, label: 'E-Ticaret', desc: 'Shopify & WooCommerce', color: '#06B6D4', href: '/hizmetler/e-ticaret' },
+  { slug: 'marka-kimligi', icon: Sparkles, label: 'Marka Kimliği', desc: 'Logo & Brand', color: '#F472B6', href: '/hizmetler/marka-kimligi' },
+])
 
 const navLinks = [
   { labelTr: 'Ana Sayfa', labelEn: 'Home', href: '/' },

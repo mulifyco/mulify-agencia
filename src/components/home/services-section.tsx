@@ -4,11 +4,13 @@ import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
 import { localizedPath } from '@/lib/locale-path'
 import { mockServices } from '@/lib/mock-data'
+import { sortServicesByPriority } from '@/lib/service-order'
 
 export default async function ServicesSection() {
   const locale = await getLocale()
   const isTr = locale === 'tr'
-  const cards = mockServices.map((service) => (
+  const services = sortServicesByPriority(mockServices)
+  const cards = services.map((service) => (
     <div
       key={service.id}
       className={`relative h-full rounded-3xl p-8 flex flex-col transition-all duration-500 group cursor-grab active:cursor-grabbing ${service.featured ? 'bg-gradient-to-br from-[#F5A623]/10 to-[#FFD166]/5 border border-[#F5A623]/30' : 'bg-[#111118] border border-white/5 hover:border-white/10'}`}
