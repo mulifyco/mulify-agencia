@@ -3,6 +3,7 @@ import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
 import BlogListClient from './blog-list-client'
 import type { Post } from '@/lib/db-types'
+import { POST_CARD_COLUMNS } from '@/lib/public-content'
 
 function db() {
   return createClient(
@@ -26,7 +27,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   const { locale } = await params
   const { data: posts } = await db()
     .from('Post')
-    .select('*')
+    .select(POST_CARD_COLUMNS)
     .eq('published', true)
     .order('publishedAt', { ascending: false })
 

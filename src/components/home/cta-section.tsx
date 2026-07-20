@@ -1,11 +1,11 @@
 'use client'
 
-import { useRef } from 'react'
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
-import { motion, useInView } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { ArrowRight, CheckCircle2, Clock, Shield } from 'lucide-react'
 import { localizedPath } from '@/lib/locale-path'
+import { HomeReveal } from './home-reveal'
 
 const trustBadges = [
   { icon: CheckCircle2, labelTr: '100+ Başarılı Proje', labelEn: '100+ Successful Projects' },
@@ -16,9 +16,6 @@ const trustBadges = [
 export default function CTASection() {
   const locale = useLocale()
   const isTr = locale === 'tr'
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
   return (
     <section className="relative py-24 md:py-32 overflow-hidden bg-[#111118]">
       {/* Amber glow center */}
@@ -40,40 +37,39 @@ export default function CTASection() {
 
       {/* Floating particles */}
       {[...Array(6)].map((_, i) => (
-        <motion.div
+        <div
           key={i}
-          className="absolute rounded-full"
           style={{
             width: `${4 + i * 2}px`,
             height: `${4 + i * 2}px`,
             left: `${10 + i * 15}%`,
             top: `${20 + (i % 3) * 25}%`,
             background: i % 2 === 0 ? 'rgba(245,166,35,0.4)' : 'rgba(108,99,255,0.4)',
-          }}
-          animate={{ y: [-10, 10, -10], opacity: [0.3, 0.8, 0.3] }}
-          transition={{ duration: 4 + i, repeat: Infinity, ease: 'easeInOut', delay: i * 0.7 }}
+            '--home-particle-duration': `${4 + i}s`,
+            '--home-particle-delay': `${i * 0.7}s`,
+          } as CSSProperties}
+          className="absolute rounded-full home-particle-float"
         />
       ))}
 
-      <div ref={ref} className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
         {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.5 }}
+        <HomeReveal
+          direction="scale"
+          duration={500}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-amber mb-8"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-[#F5A623] animate-pulse" />
           <span className="text-xs font-medium text-[#F5A623] uppercase tracking-wider">
             {isTr ? 'Ücretsiz Danışmanlık' : 'Free Consultation'}
           </span>
-        </motion.div>
+        </HomeReveal>
 
         {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        <HomeReveal
+          as="h2"
+          duration={800}
+          delay={100}
           className="font-playfair text-4xl md:text-6xl font-bold text-white leading-tight mb-6"
         >
           {isTr ? (
@@ -87,25 +83,19 @@ export default function CTASection() {
               <span className="text-amber-gradient">project to life?</span>
             </>
           )}
-        </motion.h2>
+        </HomeReveal>
 
         {/* Subtext */}
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.25 }}
+        <HomeReveal as="p" duration={700} delay={250}
           className="text-white/50 text-lg leading-relaxed max-w-xl mx-auto mb-12"
         >
           {isTr
             ? 'İlk görüşme tamamen ücretsiz. Projenizi anlatalım, size en uygun çözümü birlikte belirleyelim.'
             : 'The first consultation is completely free. Tell us about your project and let\'s find the best solution together.'}
-        </motion.p>
+        </HomeReveal>
 
         {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.35 }}
+        <HomeReveal duration={700} delay={350}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
           <Link
@@ -121,13 +111,10 @@ export default function CTASection() {
           >
             {isTr ? 'Portfolyoyu İncele' : 'View Portfolio'}
           </Link>
-        </motion.div>
+        </HomeReveal>
 
         {/* Trust badges */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
+        <HomeReveal direction="fade" duration={600} delay={500}
           className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10"
         >
           {trustBadges.map((badge) => (
@@ -136,7 +123,7 @@ export default function CTASection() {
               <span className="text-sm text-white/40">{isTr ? badge.labelTr : badge.labelEn}</span>
             </div>
           ))}
-        </motion.div>
+        </HomeReveal>
       </div>
     </section>
   )

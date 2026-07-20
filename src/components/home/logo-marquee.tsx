@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import type { CSSProperties } from 'react'
 import { useLocale } from 'next-intl'
 
 const LOGOS = [
@@ -28,11 +28,9 @@ export default function LogoMarquee() {
       </p>
 
       <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_12%,white_88%,transparent)]">
-        <motion.div
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 42, repeat: Infinity, ease: 'linear' }}
-          className="flex items-center gap-14 whitespace-nowrap"
-          style={{ willChange: 'transform' }}
+        <div
+          className="flex items-center gap-14 whitespace-nowrap home-marquee"
+          style={{ '--home-marquee-duration': '42s' } as CSSProperties}
         >
           {doubled.map((logo, i) => (
             <span
@@ -45,7 +43,7 @@ export default function LogoMarquee() {
               {logo.name}
             </span>
           ))}
-        </motion.div>
+        </div>
       </div>
     </div>
   )

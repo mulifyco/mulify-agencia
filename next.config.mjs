@@ -14,6 +14,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'trend.webruz.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'turkishrughouse.com',
+      },
     ],
   },
 }

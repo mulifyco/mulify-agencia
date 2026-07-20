@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { localizedPath } from '@/lib/locale-path'
 import { motion, useInView } from 'framer-motion'
 import { ArrowLeft, ArrowRight, ExternalLink, Tag, Calendar, User, TrendingUp } from 'lucide-react'
@@ -94,9 +95,9 @@ export default function ProjectDetailClient({
           </motion.h1>
 
           {/* Hero image */}
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.8 }} className="aspect-[16/7] rounded-3xl overflow-hidden">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.8 }} className="relative aspect-[16/7] rounded-3xl overflow-hidden">
             {project.image ? (
-              <img src={project.image} alt={title} className="w-full h-full object-cover" />
+              <Image src={project.image} alt={title} fill sizes="(max-width: 1024px) 100vw, 896px" className="object-cover" />
             ) : (
               <div className={`w-full h-full bg-gradient-to-br ${GRADIENT_MAP[0]} flex items-center justify-center`}>
                 <span className="text-8xl opacity-20">✦</span>
@@ -204,9 +205,9 @@ export default function ProjectDetailClient({
                   key={i}
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.1 }}
-                  className="aspect-video rounded-2xl overflow-hidden"
+                  className="relative aspect-video rounded-2xl overflow-hidden"
                 >
-                  <img src={img} alt={`${title} ${i + 1}`} className="w-full h-full object-cover" />
+                  <Image src={img} alt={`${title} ${i + 1}`} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
                 </motion.div>
               ))}
             </div>
@@ -237,7 +238,7 @@ export default function ProjectDetailClient({
                 >
                   <Link href={localizedPath(locale, `/projeler/${rel.slug}`)} className="group block">
                     <div className={`aspect-video rounded-2xl overflow-hidden mb-4 bg-gradient-to-br ${GRADIENT_MAP[i] ?? GRADIENT_MAP[0]} flex items-center justify-center relative`}>
-                      {rel.image && <img src={rel.image} alt={isTr ? rel.titleTr : rel.titleEn} className="w-full h-full object-cover" />}
+                      {rel.image && <Image src={rel.image} alt={isTr ? rel.titleTr : rel.titleEn} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />}
                       {!rel.image && <span className="text-4xl opacity-20">✦</span>}
                       <div className="absolute inset-0 bg-[#0A0A0F]/70 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
                         <ArrowRight className="w-6 h-6 text-white" />

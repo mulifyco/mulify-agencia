@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { localizedPath } from '@/lib/locale-path'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { ArrowRight, ExternalLink } from 'lucide-react'
@@ -45,7 +46,7 @@ function ProjectCard({ project, index, locale }: { project: Project; index: numb
         {/* Image area */}
         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4">
           {project.image ? (
-            <img src={project.image} alt={isTr ? project.titleTr : project.titleEn} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <Image src={project.image} alt={isTr ? project.titleTr : project.titleEn} fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
           ) : (
             <div className={`w-full h-full bg-gradient-to-br ${GRADIENT_MAP[index % 5] ?? GRADIENT_MAP[0]} flex items-center justify-center transition-transform duration-700 group-hover:scale-105`}>
               <span className="text-5xl opacity-30">✦</span>

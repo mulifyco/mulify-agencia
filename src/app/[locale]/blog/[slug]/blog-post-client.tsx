@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { localizedPath } from '@/lib/locale-path'
 import { motion, useInView } from 'framer-motion'
 import { ArrowLeft, ArrowRight, Calendar, Clock, Tag, Link2 } from 'lucide-react'
@@ -165,9 +166,9 @@ export default function BlogPostClient({ locale, post, related }: { locale: stri
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="aspect-[16/6] rounded-3xl overflow-hidden max-w-3xl"
+              className="relative aspect-[16/6] rounded-3xl overflow-hidden max-w-3xl"
             >
-              <img src={post.coverImage} alt={title} className="w-full h-full object-cover" />
+              <Image src={post.coverImage} alt={title} fill sizes="(max-width: 1024px) 100vw, 768px" className="object-cover" />
             </motion.div>
           </div>
         </section>
@@ -267,7 +268,7 @@ export default function BlogPostClient({ locale, post, related }: { locale: stri
                   <Link href={localizedPath(locale, `/blog/${rel.slug}`)} className="group block glass rounded-2xl overflow-hidden hover:border-[#F5A623]/30 transition-all h-full">
                     <div className={`aspect-video relative overflow-hidden bg-gradient-to-br ${GRADIENTS[i % 3]} flex items-center justify-center`}>
                       {rel.coverImage ? (
-                        <img src={rel.coverImage} alt={isTr ? rel.titleTr : rel.titleEn} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <Image src={rel.coverImage} alt={isTr ? rel.titleTr : rel.titleEn} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                       ) : (
                         <span className="text-3xl opacity-20">✦</span>
                       )}

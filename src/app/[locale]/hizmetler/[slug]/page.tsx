@@ -1,23 +1,15 @@
-import { createClient } from '@supabase/supabase-js'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
 import ServiceDetailClient from './service-detail-client'
 import type { Service } from '@/lib/db-types'
-
-function db() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    { auth: { persistSession: false, autoRefreshToken: false } }
-  )
-}
+import { getRelatedServices, getServiceBySlug } from '@/lib/public-content'
 
 export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale, slug } = await params
-  const { data } = await db().from('Service').select('titleTr,titleEn,descTr,descEn').eq('slug', slug).single()
+  const data = await getServiceBySlug(slug)
   if (!data) return {}
   return {
     title: locale === 'tr' ? data.titleTr : data.titleEn,
@@ -36,15 +28,14 @@ const KNOWN_SLUGS: Record<string, Service> = {
 export default async function ServiceDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale, slug } = await params
 
-  const [{ data: service }, { data: allServices }] = await Promise.all([
-    db().from('Service').select('*').eq('slug', slug).eq('published', true).single(),
-    db().from('Service').select('*').eq('published', true).order('order'),
+  const [service, related] = await Promise.all([
+    getServiceBySlug(slug),
+    getRelatedServices(slug),
   ])
 
   const resolvedService = (service as Service | null) ?? KNOWN_SLUGS[slug] ?? null
   if (!resolvedService) notFound()
 
-  const related = ((allServices ?? []) as Service[]).filter((s) => s.slug !== slug).slice(0, 3)
   const relatedFallback = Object.values(KNOWN_SLUGS).filter((s) => s.slug !== slug).slice(0, 3)
 
   return (

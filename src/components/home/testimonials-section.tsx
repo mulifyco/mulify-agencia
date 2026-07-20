@@ -1,11 +1,11 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
-import { motion, useInView } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { Star } from 'lucide-react'
 import { mockTestimonials } from '@/lib/mock-data'
+import { HomeReveal } from './home-reveal'
 
 function TestimonialCard({ t }: { t: (typeof mockTestimonials)[0] }) {
   return (
@@ -29,7 +29,7 @@ function TestimonialCard({ t }: { t: (typeof mockTestimonials)[0] }) {
         {/* Author */}
         <div className="flex items-center gap-3 pt-2 border-t border-white/5">
           <div className="relative w-9 h-9 rounded-full overflow-hidden bg-[#1C1C28] flex-shrink-0">
-            <Image src={t.avatar} alt={t.name} fill className="object-cover" unoptimized />
+            <Image src={t.avatar} alt={t.name} fill sizes="36px" className="object-cover" />
           </div>
           <div>
             <div className="text-sm font-semibold text-white">{t.name}</div>
@@ -45,16 +45,13 @@ function MarqueeRow({ items, reverse = false, paused }: { items: typeof mockTest
   const doubled = [...items, ...items]
   return (
     <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_8%,white_92%,transparent)]">
-      <motion.div
-        animate={{ x: reverse ? ['0%', '50%'] : ['0%', '-50%'] }}
-        transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-        className="flex"
-        style={{ animationPlayState: paused ? 'paused' : 'running' }}
+      <div
+        className={`flex home-marquee ${reverse ? 'home-marquee-reverse' : ''} ${paused ? 'home-marquee-paused' : ''}`}
       >
         {doubled.map((t, i) => (
           <TestimonialCard key={`${t.id}-${i}`} t={t} />
         ))}
-      </motion.div>
+      </div>
     </div>
   )
 }
@@ -62,8 +59,6 @@ function MarqueeRow({ items, reverse = false, paused }: { items: typeof mockTest
 export default function TestimonialsSection() {
   const locale = useLocale()
   const isTr = locale === 'tr'
-  const headerRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(headerRef, { once: true, margin: '-80px' })
   const [paused, setPaused] = useState(false)
 
   const half = Math.ceil(mockTestimonials.length / 2)
@@ -79,19 +74,13 @@ export default function TestimonialsSection() {
       />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div ref={headerRef} className="text-center mb-16">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
+        <div className="text-center mb-16">
+          <HomeReveal as="p"
             className="text-xs uppercase tracking-[0.3em] text-[#F5A623] mb-4"
           >
             {isTr ? '— Müşteri Yorumları —' : '— Client Reviews —'}
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
+          </HomeReveal>
+          <HomeReveal as="h2" duration={700} delay={100}
             className="font-playfair text-4xl md:text-5xl font-bold text-white"
           >
             {isTr ? (
@@ -99,7 +88,7 @@ export default function TestimonialsSection() {
             ) : (
               <>Success, <span className="text-amber-gradient">in their words</span></>
             )}
-          </motion.h2>
+          </HomeReveal>
         </div>
       </div>
 

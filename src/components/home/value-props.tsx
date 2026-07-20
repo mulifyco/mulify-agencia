@@ -1,9 +1,8 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { Rocket, Target, Shield, Sparkles } from 'lucide-react'
+import { HomeReveal } from './home-reveal'
 
 const bentoCards = [
   {
@@ -66,11 +65,8 @@ const leftPoints = [
 export default function ValueProps() {
   const locale = useLocale()
   const isTr = locale === 'tr'
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
-
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-32 bg-[#0A0A0F] overflow-hidden">
+    <section className="relative py-24 md:py-32 bg-[#0A0A0F] overflow-hidden">
       {/* Amber glow background */}
       <div
         className="absolute left-0 top-1/2 -translate-y-1/2 w-[400px] h-[400px] pointer-events-none"
@@ -84,19 +80,13 @@ export default function ValueProps() {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Left: Text */}
           <div>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
+            <HomeReveal as="p"
               className="text-xs uppercase tracking-[0.3em] text-[#F5A623] mb-4"
             >
               {isTr ? '— Neden Mulify? —' : '— Why Mulify? —'}
-            </motion.p>
+            </HomeReveal>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.1 }}
+            <HomeReveal as="h2" duration={700} delay={100}
               className="font-playfair text-4xl md:text-5xl font-bold text-white leading-tight mb-6"
             >
               {isTr ? (
@@ -104,26 +94,22 @@ export default function ValueProps() {
               ) : (
                 <>We go beyond<br /><span className="text-amber-gradient">ordinary agencies</span></>
               )}
-            </motion.h2>
+            </HomeReveal>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
+            <HomeReveal as="p" delay={200}
               className="text-white/50 leading-relaxed mb-12"
             >
               {isTr
                 ? 'Müşterilerimize sadece bir hizmet sunmuyoruz — onların dijital büyüme ortakları oluyoruz. Her kararı strateji, veriler ve derin sektör bilgisiyle alıyoruz.'
                 : 'We don\'t just provide a service to our clients — we become their digital growth partners. We make every decision with strategy, data, and deep industry knowledge.'}
-            </motion.p>
+            </HomeReveal>
 
             <div className="space-y-8">
               {leftPoints.map((pt, i) => (
-                <motion.div
+                <HomeReveal
                   key={pt.num}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
+                  direction="left"
+                  delay={300 + i * 100}
                   className="flex gap-5"
                 >
                   <span className="font-playfair text-3xl font-bold text-[#F5A623]/20 flex-shrink-0 w-10 pt-1">
@@ -137,7 +123,7 @@ export default function ValueProps() {
                       {isTr ? pt.descTr : pt.descEn}
                     </p>
                   </div>
-                </motion.div>
+                </HomeReveal>
               ))}
             </div>
           </div>
@@ -145,11 +131,9 @@ export default function ValueProps() {
           {/* Right: Bento Grid */}
           <div className="grid grid-cols-2 gap-4">
             {bentoCards.map((card, i) => (
-              <motion.div
+              <HomeReveal
                 key={card.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                delay={200 + i * 100}
                 className={`${card.span} ${card.bg} ${card.border ?? ''} rounded-2xl p-6 group hover:scale-[1.02] transition-transform duration-300`}
               >
                 <div className={`w-10 h-10 rounded-xl ${card.iconBg} flex items-center justify-center mb-4`}>
@@ -161,7 +145,7 @@ export default function ValueProps() {
                 <p className={`text-sm leading-relaxed ${card.textColor === 'text-[#0A0A0F]' ? 'text-[#0A0A0F]/70' : 'text-white/50'}`}>
                   {isTr ? card.descTr : card.descEn}
                 </p>
-              </motion.div>
+              </HomeReveal>
             ))}
           </div>
         </div>

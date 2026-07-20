@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { localizedPath } from '@/lib/locale-path'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { ArrowRight, Calendar, Clock, Search, Tag } from 'lucide-react'
@@ -72,7 +73,7 @@ function PostCard({ post, index, locale }: { post: Post; index: number; locale: 
         {/* Image */}
         <div className={`aspect-video relative overflow-hidden bg-gradient-to-br ${GRADIENTS[index % 4]} flex items-center justify-center`}>
           {post.coverImage ? (
-            <img src={post.coverImage} alt={isTr ? post.titleTr : post.titleEn} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <Image src={post.coverImage} alt={isTr ? post.titleTr : post.titleEn} fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
           ) : (
             <span className="text-4xl opacity-20 transition-transform duration-700 group-hover:scale-110">✦</span>
           )}
@@ -246,7 +247,7 @@ export default function BlogListClient({ locale, posts }: { locale: string; post
                       <div className="grid lg:grid-cols-[1.2fr_1fr] gap-0">
                         <div className={`aspect-video lg:aspect-auto min-h-[280px] relative overflow-hidden bg-gradient-to-br ${GRADIENTS[0]} flex items-center justify-center`}>
                           {featured.coverImage ? (
-                            <img src={featured.coverImage} alt={isTr ? featured.titleTr : featured.titleEn} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                            <Image src={featured.coverImage} alt={isTr ? featured.titleTr : featured.titleEn} fill sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                           ) : (
                             <span className="text-7xl opacity-15 transition-transform duration-700 group-hover:scale-110">✦</span>
                           )}

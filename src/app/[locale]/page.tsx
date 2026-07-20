@@ -12,6 +12,7 @@ import FAQSection from '@/components/home/faq-section'
 import CTASection from '@/components/home/cta-section'
 import Footer from '@/components/shared/footer'
 import type { Project } from '@/lib/db-types'
+import { getPricingPlans, PROJECT_CARD_COLUMNS } from '@/lib/public-content'
 
 function db() {
   return createClient(
@@ -24,12 +25,15 @@ function db() {
 export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
-  const { data: projects } = await db()
-    .from('Project')
-    .select('*')
-    .eq('published', true)
-    .order('order', { ascending: true })
-    .limit(6)
+  const [{ data: projects }, pricingPlans] = await Promise.all([
+    db()
+      .from('Project')
+      .select(PROJECT_CARD_COLUMNS)
+      .eq('published', true)
+      .order('order', { ascending: true })
+      .limit(6),
+    getPricingPlans(),
+  ])
 
   return (
     <main>
@@ -41,7 +45,7 @@ export default async function HomePage() {
       <ValueProps />
       <FeaturedProjects projects={(projects ?? []) as Project[]} />
       <TestimonialsSection />
-      <PricingSection />
+      <PricingSection initialPlans={pricingPlans} />
       <FAQSection />
       <CTASection />
       <Footer />

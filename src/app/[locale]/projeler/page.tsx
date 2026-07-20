@@ -3,6 +3,7 @@ import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
 import ProjectsListClient from './projects-list-client'
 import type { Project } from '@/lib/db-types'
+import { PROJECT_CARD_COLUMNS } from '@/lib/public-content'
 
 function db() {
   return createClient(
@@ -26,7 +27,7 @@ export default async function ProjelerPage({ params }: { params: Promise<{ local
   const { locale } = await params
   const { data: projects } = await db()
     .from('Project')
-    .select('*')
+    .select(PROJECT_CARD_COLUMNS)
     .eq('published', true)
     .order('order', { ascending: true })
 
