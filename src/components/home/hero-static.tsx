@@ -103,16 +103,26 @@ export default function HeroStatic({ locale }: { locale: string }) {
             transition={{ duration: 0.8, delay: 0.25 }}
             className="flex min-h-[280px] items-center justify-center px-2 sm:min-h-[380px] sm:px-8 lg:min-h-[520px] lg:px-4"
           >
-            <Image
-              src="/images/hero/hero-metrics-transparent.png"
-              alt={isTr ? 'Mulify dijital ajans hizmetleri' : 'Mulify digital agency services'}
-              width={1047}
-              height={1503}
-              priority
-              quality={95}
-              sizes="(max-width: 639px) 78vw, (max-width: 1023px) 390px, 440px"
-              className="mx-auto h-auto w-[78vw] max-w-[340px] object-contain object-center sm:w-[52vw] sm:max-w-[390px] lg:w-full lg:max-w-[440px]"
-            />
+            <div
+              className="mx-auto w-[94vw] max-w-[560px] mix-blend-lighten sm:w-[72vw] sm:max-w-[680px] lg:w-full lg:max-w-[760px]"
+              style={{
+                WebkitMaskImage:
+                  'radial-gradient(ellipse 68% 66% at 51% 51%, #000 34%, rgba(0,0,0,0.96) 48%, rgba(0,0,0,0.55) 66%, transparent 88%)',
+                maskImage:
+                  'radial-gradient(ellipse 68% 66% at 51% 51%, #000 34%, rgba(0,0,0,0.96) 48%, rgba(0,0,0,0.55) 66%, transparent 88%)',
+              }}
+            >
+              <Image
+                src="/images/hero/hero-ads-analytics.png"
+                alt={isTr ? 'Google Ads ve Meta Ads performans analitiği' : 'Google Ads and Meta Ads performance analytics'}
+                width={1672}
+                height={941}
+                priority
+                quality={95}
+                sizes="(max-width: 639px) 94vw, (max-width: 1023px) 72vw, 760px"
+                className="h-auto w-full object-contain object-center"
+              />
+            </div>
           </motion.div>
         </div>
       </div>

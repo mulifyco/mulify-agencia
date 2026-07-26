@@ -3,14 +3,13 @@
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
-import { ArrowRight, CheckCircle2, Clock, Shield } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Clock } from 'lucide-react'
 import { localizedPath } from '@/lib/locale-path'
 import { HomeReveal } from './home-reveal'
 
 const trustBadges = [
   { icon: CheckCircle2, labelTr: '100+ Başarılı Proje', labelEn: '100+ Successful Projects' },
   { icon: Clock, labelTr: 'Zamanında Teslimat', labelEn: 'On-Time Delivery' },
-  { icon: Shield, labelTr: '2 Yıl Garanti Desteği', labelEn: '2 Year Guarantee Support' },
 ]
 
 export default function CTASection() {
@@ -61,7 +60,7 @@ export default function CTASection() {
         >
           <div className="w-1.5 h-1.5 rounded-full bg-[#F5A623] animate-pulse" />
           <span className="text-xs font-medium text-[#F5A623] uppercase tracking-wider">
-            {isTr ? 'Ücretsiz Danışmanlık' : 'Free Consultation'}
+            {isTr ? 'Ücretsiz Analiz' : 'Free Analysis'}
           </span>
         </HomeReveal>
 
@@ -115,7 +114,7 @@ export default function CTASection() {
 
         {/* Trust badges */}
         <HomeReveal direction="fade" duration={600} delay={500}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10"
+          className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-12"
         >
           {trustBadges.map((badge) => (
             <div key={badge.labelEn} className="flex items-center gap-2">
