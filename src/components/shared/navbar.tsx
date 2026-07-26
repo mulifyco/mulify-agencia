@@ -6,26 +6,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useLocale } from 'next-intl'
 import { BRAND_LOGO_URL, BRAND_NAME } from '@/lib/brand'
 import { localizedPath } from '@/lib/locale-path'
-import { sortServicesByPriority } from '@/lib/service-order'
+import { publicServices } from '@/lib/services-data'
 import {
-  Palette,
-  Code2,
-  TrendingUp,
-  ShoppingCart,
-  Sparkles,
   ChevronDown,
   Menu,
   X,
   ArrowRight,
 } from 'lucide-react'
-
-const serviceItems = sortServicesByPriority([
-  { slug: 'web-tasarim', icon: Palette, label: 'Web Tasarım / Web Design', desc: 'UI/UX & Marka', color: '#F5A623', href: '/hizmetler/web-tasarim' },
-  { slug: 'web-gelistirme', icon: Code2, label: 'Web Geliştirme / Web Dev', desc: 'Next.js & React', color: '#6C63FF', href: '/hizmetler/web-gelistirme' },
-  { slug: 'dijital-pazarlama', icon: TrendingUp, label: 'Dijital Pazarlama', desc: 'SEO & Growth', color: '#10B981', href: '/hizmetler/dijital-pazarlama' },
-  { slug: 'e-ticaret', icon: ShoppingCart, label: 'E-Ticaret', desc: 'Shopify & WooCommerce', color: '#06B6D4', href: '/hizmetler/e-ticaret' },
-  { slug: 'marka-kimligi', icon: Sparkles, label: 'Marka Kimliği', desc: 'Logo & Brand', color: '#F472B6', href: '/hizmetler/marka-kimligi' },
-])
 
 const navLinks = [
   { labelTr: 'Ana Sayfa', labelEn: 'Home', href: '/' },
@@ -140,10 +127,10 @@ export default function Navbar() {
                           className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[480px] glass rounded-2xl p-3 shadow-2xl"
                         >
                           <div className="grid grid-cols-1 gap-1">
-                            {serviceItems.map((item) => (
+                            {publicServices.map((item) => (
                               <Link
-                                key={item.href}
-                                href={localizedPath(locale, item.href)}
+                                key={item.key}
+                                href={localizedPath(locale, `/hizmetler/${item.slug}`)}
                                 onClick={() => setServicesOpen(false)}
                                 className="flex items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-all duration-200 group/item"
                               >
@@ -151,13 +138,17 @@ export default function Navbar() {
                                   className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                                   style={{ backgroundColor: `${item.color}20`, border: `1px solid ${item.color}30` }}
                                 >
-                                  <item.icon className="w-5 h-5" style={{ color: item.color }} />
+                                  <span className="text-lg" aria-hidden="true">{item.icon}</span>
                                 </div>
-                                <div>
+                                <div className="min-w-0">
                                   <div className="text-sm font-medium text-white group-hover/item:text-[#F5A623] transition-colors">
-                                    {item.label}
+                                    {locale === 'tr' ? item.titleTr : item.titleEn}
                                   </div>
-                                  <div className="text-xs text-white/40">{item.desc}</div>
+                                  <div className="mt-1 grid grid-cols-2 gap-x-3 gap-y-0.5 text-[10px] leading-4 text-white/40">
+                                    {(locale === 'tr' ? item.featuresTr : item.featuresEn).map((feature) => (
+                                      <span key={feature} className="truncate">• {feature}</span>
+                                    ))}
+                                  </div>
                                 </div>
                                 <ArrowRight className="w-3.5 h-3.5 text-white/20 group-hover/item:text-[#F5A623] ml-auto transition-all group-hover/item:translate-x-1" />
                               </Link>
@@ -249,9 +240,9 @@ export default function Navbar() {
             {/* Links */}
             <motion.nav
               variants={staggerContainer}
-              className="flex-1 flex flex-col justify-center px-6 gap-2"
+              className="flex flex-1 flex-col gap-2 overflow-y-auto px-6 py-6"
             >
-              {navLinks.map((link, i) => (
+              {navLinks.map((link) => (
                 <motion.div key={link.href} variants={staggerItem}>
                   <Link
                     href={localizedPath(locale, link.href)}
@@ -263,6 +254,30 @@ export default function Navbar() {
                     </span>
                     <ArrowRight className="w-5 h-5 text-white/20 group-hover:text-[#F5A623] group-hover:translate-x-1 transition-all" />
                   </Link>
+                  {link.hasDropdown && (
+                    <div className="grid grid-cols-1 gap-1 border-b border-white/5 py-2">
+                      {publicServices.map((item) => (
+                        <Link
+                          key={item.key}
+                          href={localizedPath(locale, `/hizmetler/${item.slug}`)}
+                          onClick={() => setMobileOpen(false)}
+                          className="flex items-start gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-white/5"
+                        >
+                          <span className="pt-0.5 text-base" aria-hidden="true">{item.icon}</span>
+                          <span className="min-w-0">
+                            <span className="block text-sm font-medium text-white">
+                              {locale === 'tr' ? item.titleTr : item.titleEn}
+                            </span>
+                            <span className="mt-0.5 grid grid-cols-2 gap-x-2 text-[10px] leading-4 text-white/40">
+                              {(locale === 'tr' ? item.featuresTr : item.featuresEn).map((feature) => (
+                                <span key={feature} className="truncate">• {feature}</span>
+                              ))}
+                            </span>
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </motion.nav>

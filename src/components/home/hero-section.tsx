@@ -1,7 +1,7 @@
 import { getLocale } from 'next-intl/server'
-import HeroCarousel from './hero-carousel'
+import HeroStatic from './hero-static'
 
 export default async function HeroSection() {
   const locale = await getLocale()
-  return <HeroCarousel locale={locale} />
+  return <HeroStatic locale={locale} />
 }
