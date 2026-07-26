@@ -7,6 +7,7 @@ import { localizedPath } from '@/lib/locale-path'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import type { Project } from '@/lib/db-types'
+import { getProjectCoverImage } from '@/lib/project-covers'
 import {
   PROJECT_SERVICE_CATEGORIES,
   getProjectServiceCategory,
@@ -31,6 +32,7 @@ const GRADIENT_MAP: Record<number, string> = {
 
 function ProjectCard({ project, index, locale }: { project: Project; index: number; locale: string }) {
   const isTr = locale === 'tr'
+  const image = getProjectCoverImage(project)
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -45,8 +47,8 @@ function ProjectCard({ project, index, locale }: { project: Project; index: numb
       <Link href={localizedPath(locale, `/projeler/${project.slug}`)} className="block">
         {/* Image area */}
         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4">
-          {project.image ? (
-            <Image src={project.image} alt={isTr ? project.titleTr : project.titleEn} fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+          {image ? (
+            <Image src={image} alt={isTr ? project.titleTr : project.titleEn} fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
           ) : (
             <div className={`w-full h-full bg-gradient-to-br ${GRADIENT_MAP[index % 5] ?? GRADIENT_MAP[0]} flex items-center justify-center transition-transform duration-700 group-hover:scale-105`}>
               <span className="text-5xl opacity-30">✦</span>

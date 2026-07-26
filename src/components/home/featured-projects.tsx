@@ -6,12 +6,7 @@ import Link from 'next/link'
 import { ExternalLink } from 'lucide-react'
 import { localizedPath } from '@/lib/locale-path'
 import { mockProjects } from '@/lib/mock-data'
-
-const PROJECT_COVER_OVERRIDES: Record<string, string> = {
-  hukuk: '/images/projects/hukuk.webp',
-  mimarlik: '/images/projects/mimarlik.webp',
-  'saglik-klinigi-web-sitesi': '/images/projects/saglik-klinigi.webp',
-}
+import { getProjectCoverImage } from '@/lib/project-covers'
 
 function projectCategory(tags: string[]) {
   const value = tags.join(' ').toLocaleLowerCase('tr-TR')
@@ -26,7 +21,7 @@ export default async function FeaturedProjects({ projects }: { projects: Project
   const source = projects.length > 0 ? projects.slice(0, 6) : mockProjects.slice(0, 6).map((project) => ({ ...project, descTr: '', descEn: '' }))
   const items = source.map((project) => {
     const category = projectCategory(project.tags ?? [])
-    const image = PROJECT_COVER_OVERRIDES[project.slug] ?? project.image
+    const image = getProjectCoverImage(project)
     return {
       id: project.id,
       category,

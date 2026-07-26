@@ -124,7 +124,7 @@ export default function Navbar() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 8, scale: 0.96 }}
                           transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                          className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[480px] glass rounded-2xl p-3 shadow-2xl"
+                          className="absolute top-full left-1/2 z-[60] -translate-x-1/2 mt-3 w-[480px] rounded-2xl border border-white/10 bg-[rgba(12,12,18,0.98)] p-3 shadow-2xl backdrop-blur-xl"
                         >
                           <div className="grid grid-cols-1 gap-1">
                             {publicServices.map((item) => (

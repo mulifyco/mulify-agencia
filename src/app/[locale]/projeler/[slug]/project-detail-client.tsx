@@ -7,6 +7,7 @@ import { localizedPath } from '@/lib/locale-path'
 import { motion, useInView } from 'framer-motion'
 import { ArrowLeft, ArrowRight, ExternalLink, Tag, Calendar, User, TrendingUp } from 'lucide-react'
 import type { Project } from '@/lib/db-types'
+import { getProjectCoverImage } from '@/lib/project-covers'
 
 const METRICS_MAP: Record<string, { tr: { value: string; label: string }[]; en: { value: string; label: string }[] }> = {
   'moda-brand-redesign': {
@@ -40,6 +41,7 @@ export default function ProjectDetailClient({
   const isTr = locale === 'tr'
   const title = isTr ? project.titleTr : project.titleEn
   const desc = isTr ? project.descTr : project.descEn
+  const coverImage = getProjectCoverImage(project)
   const metrics = (METRICS_MAP[project.slug] ?? DEFAULT_METRICS)
   const metricsData = isTr ? metrics.tr : metrics.en
 
@@ -96,8 +98,8 @@ export default function ProjectDetailClient({
 
           {/* Hero image */}
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.8 }} className="relative aspect-[16/7] rounded-3xl overflow-hidden">
-            {project.image ? (
-              <Image src={project.image} alt={title} fill sizes="(max-width: 1024px) 100vw, 896px" className="object-cover" />
+            {coverImage ? (
+              <Image src={coverImage} alt={title} fill sizes="(max-width: 1024px) 100vw, 896px" className="object-cover" />
             ) : (
               <div className={`w-full h-full bg-gradient-to-br ${GRADIENT_MAP[0]} flex items-center justify-center`}>
                 <span className="text-8xl opacity-20">✦</span>
@@ -230,27 +232,30 @@ export default function ProjectDetailClient({
               </Link>
             </motion.div>
             <div className="grid md:grid-cols-3 gap-6">
-              {related.map((rel, i) => (
-                <motion.div
-                  key={rel.id}
-                  initial={{ opacity: 0, y: 30 }} animate={isRelatedInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                >
-                  <Link href={localizedPath(locale, `/projeler/${rel.slug}`)} className="group block">
-                    <div className={`aspect-video rounded-2xl overflow-hidden mb-4 bg-gradient-to-br ${GRADIENT_MAP[i] ?? GRADIENT_MAP[0]} flex items-center justify-center relative`}>
-                      {rel.image && <Image src={rel.image} alt={isTr ? rel.titleTr : rel.titleEn} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />}
-                      {!rel.image && <span className="text-4xl opacity-20">✦</span>}
-                      <div className="absolute inset-0 bg-[#0A0A0F]/70 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
-                        <ArrowRight className="w-6 h-6 text-white" />
+              {related.map((rel, i) => {
+                const relatedCoverImage = getProjectCoverImage(rel)
+                return (
+                  <motion.div
+                    key={rel.id}
+                    initial={{ opacity: 0, y: 30 }} animate={isRelatedInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: i * 0.1 }}
+                  >
+                    <Link href={localizedPath(locale, `/projeler/${rel.slug}`)} className="group block">
+                      <div className={`aspect-video rounded-2xl overflow-hidden mb-4 bg-gradient-to-br ${GRADIENT_MAP[i] ?? GRADIENT_MAP[0]} flex items-center justify-center relative`}>
+                        {relatedCoverImage && <Image src={relatedCoverImage} alt={isTr ? rel.titleTr : rel.titleEn} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />}
+                        {!relatedCoverImage && <span className="text-4xl opacity-20">✦</span>}
+                        <div className="absolute inset-0 bg-[#0A0A0F]/70 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
+                          <ArrowRight className="w-6 h-6 text-white" />
+                        </div>
                       </div>
-                    </div>
-                    {rel.client && <div className="text-xs text-[#F5A623]/70 mb-1">{rel.client}</div>}
-                    <h3 className="font-semibold text-white group-hover:text-[#F5A623] transition-colors">
-                      {isTr ? rel.titleTr : rel.titleEn}
-                    </h3>
-                  </Link>
-                </motion.div>
-              ))}
+                      {rel.client && <div className="text-xs text-[#F5A623]/70 mb-1">{rel.client}</div>}
+                      <h3 className="font-semibold text-white group-hover:text-[#F5A623] transition-colors">
+                        {isTr ? rel.titleTr : rel.titleEn}
+                      </h3>
+                    </Link>
+                  </motion.div>
+                )
+              })}
             </div>
           </div>
         </section>
