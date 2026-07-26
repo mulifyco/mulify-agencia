@@ -43,6 +43,11 @@ export async function getRelatedServices(slug: string) {
   return (data ?? []) as Service[]
 }
 
+export async function getPublicSetting(key: string) {
+  const { data, error } = await db().from('SiteSetting').select('value').eq('key', key).maybeSingle()
+  return error ? null : data?.value ?? null
+}
+
 export async function getRelatedPosts(slug: string) {
   const { data } = await db().from('Post').select(POST_CARD_COLUMNS).eq('published', true).neq('slug', slug).order('publishedAt', { ascending: false }).limit(3)
   return (data ?? []) as Post[]

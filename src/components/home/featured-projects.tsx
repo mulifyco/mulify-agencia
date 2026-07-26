@@ -7,6 +7,12 @@ import { ExternalLink } from 'lucide-react'
 import { localizedPath } from '@/lib/locale-path'
 import { mockProjects } from '@/lib/mock-data'
 
+const PROJECT_COVER_OVERRIDES: Record<string, string> = {
+  hukuk: '/images/projects/hukuk.webp',
+  mimarlik: '/images/projects/mimarlik.webp',
+  'saglik-klinigi-web-sitesi': '/images/projects/saglik-klinigi.webp',
+}
+
 function projectCategory(tags: string[]) {
   const value = tags.join(' ').toLocaleLowerCase('tr-TR')
   if (value.includes('sosyal') || value.includes('social')) return 'Sosyal Medya'
@@ -20,13 +26,14 @@ export default async function FeaturedProjects({ projects }: { projects: Project
   const source = projects.length > 0 ? projects.slice(0, 6) : mockProjects.slice(0, 6).map((project) => ({ ...project, descTr: '', descEn: '' }))
   const items = source.map((project) => {
     const category = projectCategory(project.tags ?? [])
+    const image = PROJECT_COVER_OVERRIDES[project.slug] ?? project.image
     return {
       id: project.id,
       category,
       card: (
         <div className="group relative rounded-3xl overflow-hidden cursor-grab active:cursor-grabbing">
           <div className="relative h-64 md:h-72 overflow-hidden bg-[#1C1C28]">
-            {project.image ? <Image src={project.image} alt={isTr ? project.titleTr : project.titleEn} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 340px, 420px" /> : null}
+            {image ? <Image src={image} alt={isTr ? project.titleTr : project.titleEn} fill className="object-cover transition-transform duration-700 group-hover:scale-110" sizes="(max-width: 768px) 340px, 420px" /> : null}
             <div className="absolute inset-0 bg-[#0A0A0F]/80 opacity-0 group-hover:opacity-100 transition-all duration-400 flex flex-col items-center justify-center gap-4">
               <h3 className="font-playfair text-xl font-bold text-white text-center px-6">{isTr ? project.titleTr : project.titleEn}</h3>
               <Link href={localizedPath(locale, `/projeler/${project.slug}`)} className="flex items-center gap-2 px-5 py-2.5 bg-[#F5A623] text-[#0A0A0F] text-sm font-semibold rounded-xl hover:bg-[#FFD166] transition-colors">{isTr ? 'İncele' : 'View Project'}<ExternalLink className="w-3.5 h-3.5" /></Link>

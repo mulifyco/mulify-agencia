@@ -76,11 +76,12 @@ function fi(delay = 0) {
 }
 
 export default function ServiceDetailClient({
-  locale, service, related,
+  locale, service, related, whatsappUrl,
 }: {
   locale: string
   service: Service
   related: Service[]
+  whatsappUrl: string | null
 }) {
   const isTr = locale === 'tr'
   const title = isTr ? service.titleTr : service.titleEn
@@ -142,7 +143,12 @@ export default function ServiceDetailClient({
                   {isTr ? 'Bu Hizmet İçin Teklif Al' : 'Get Quote for This Service'}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-                <Link href={localizedPath(locale, '/iletisim')} className="inline-flex items-center gap-2 px-8 py-4 glass rounded-xl text-white text-sm font-medium hover:bg-white/8 transition-all">
+                <Link
+                  href={whatsappUrl ?? localizedPath(locale, '/iletisim')}
+                  target={whatsappUrl ? '_blank' : undefined}
+                  rel={whatsappUrl ? 'noopener noreferrer' : undefined}
+                  className="inline-flex items-center gap-2 px-8 py-4 glass rounded-xl text-white text-sm font-medium hover:bg-white/8 transition-all"
+                >
                   <MessageSquare className="w-4 h-4" />
                   {isTr ? 'Soru Sor' : 'Ask a Question'}
                 </Link>

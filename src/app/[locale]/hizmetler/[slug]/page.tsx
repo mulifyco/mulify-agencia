@@ -3,7 +3,8 @@ import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
 import ServiceDetailClient from './service-detail-client'
 import type { Service } from '@/lib/db-types'
-import { getRelatedServices, getServiceBySlug } from '@/lib/public-content'
+import { getPublicSetting, getRelatedServices, getServiceBySlug } from '@/lib/public-content'
+import { createWhatsAppUrl } from '@/lib/whatsapp'
 
 export const dynamic = 'force-dynamic'
 
@@ -28,15 +29,18 @@ const KNOWN_SLUGS: Record<string, Service> = {
 export default async function ServiceDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale, slug } = await params
 
-  const [service, related] = await Promise.all([
+  const [service, related, contactPhone] = await Promise.all([
     getServiceBySlug(slug),
     getRelatedServices(slug),
+    getPublicSetting('contact_phone'),
   ])
 
   const resolvedService = (service as Service | null) ?? KNOWN_SLUGS[slug] ?? null
   if (!resolvedService) notFound()
 
   const relatedFallback = Object.values(KNOWN_SLUGS).filter((s) => s.slug !== slug).slice(0, 3)
+  const serviceName = locale === 'tr' ? resolvedService.titleTr : resolvedService.titleEn
+  const whatsappUrl = createWhatsAppUrl(contactPhone, serviceName, locale)
 
   return (
     <>
@@ -45,6 +49,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         locale={locale}
         service={resolvedService}
         related={related.length > 0 ? related : relatedFallback}
+        whatsappUrl={whatsappUrl}
       />
       <Footer />
     </>
