@@ -24,7 +24,7 @@ export const publicServices: readonly PublicServiceItem[] = [
     featuresTr: ['İçerik Üretimi', 'Aylık Planlama', 'Reels Tasarımı', 'Topluluk Yönetimi'],
     featuresEn: ['Content Production', 'Monthly Planning', 'Reels Design', 'Community Management'],
     color: '#10B981',
-    featured: false,
+    featured: true,
   },
   {
     key: 'meta-ads',
@@ -37,7 +37,7 @@ export const publicServices: readonly PublicServiceItem[] = [
     featuresTr: ['Facebook Ads', 'Remarketing', 'Instagram Ads', 'Ölçeklendirme'],
     featuresEn: ['Facebook Ads', 'Remarketing', 'Instagram Ads', 'Scaling'],
     color: '#6C63FF',
-    featured: false,
+    featured: true,
   },
   {
     key: 'shopify-ecommerce',
@@ -76,6 +76,6 @@ export const publicServices: readonly PublicServiceItem[] = [
     featuresTr: ['Landing Page', 'SEO Altyapısı', 'Kurumsal Site', 'Hız Optimizasyonu'],
     featuresEn: ['Landing Page', 'SEO Foundation', 'Corporate Website', 'Speed Optimization'],
     color: '#F5A623',
-    featured: true,
+    featured: false,
   },
 ]

@@ -22,6 +22,8 @@ const navLinks = [
   { labelTr: 'Blog', labelEn: 'Blog', href: '/blog' },
 ]
 
+const featuredNavbarServiceKeys = new Set(['social-media-management', 'meta-ads'])
+
 const mobileMenuVariants = {
   closed: { opacity: 0, x: '100%' },
   open: { opacity: 1, x: 0 },
@@ -141,8 +143,15 @@ export default function Navbar() {
                                   <span className="text-lg" aria-hidden="true">{item.icon}</span>
                                 </div>
                                 <div className="min-w-0">
-                                  <div className="text-sm font-medium text-white group-hover/item:text-[#F5A623] transition-colors">
-                                    {locale === 'tr' ? item.titleTr : item.titleEn}
+                                  <div className="flex items-center gap-2">
+                                    <div className="text-sm font-medium text-white group-hover/item:text-[#F5A623] transition-colors">
+                                      {locale === 'tr' ? item.titleTr : item.titleEn}
+                                    </div>
+                                    {featuredNavbarServiceKeys.has(item.key) && (
+                                      <span className="shrink-0 rounded-full bg-[#F5A623] px-2 py-1 text-[10px] font-semibold leading-none tracking-wide text-[#0A0A0F]">
+                                        {locale === 'tr' ? 'ÖNE ÇIKAN' : 'FEATURED'}
+                                      </span>
+                                    )}
                                   </div>
                                   <div className="mt-1 grid grid-cols-2 gap-x-3 gap-y-0.5 text-[10px] leading-4 text-white/40">
                                     {(locale === 'tr' ? item.featuresTr : item.featuresEn).map((feature) => (
@@ -265,8 +274,15 @@ export default function Navbar() {
                         >
                           <span className="pt-0.5 text-base" aria-hidden="true">{item.icon}</span>
                           <span className="min-w-0">
-                            <span className="block text-sm font-medium text-white">
-                              {locale === 'tr' ? item.titleTr : item.titleEn}
+                            <span className="flex items-center gap-2">
+                              <span className="block text-sm font-medium text-white">
+                                {locale === 'tr' ? item.titleTr : item.titleEn}
+                              </span>
+                              {featuredNavbarServiceKeys.has(item.key) && (
+                                <span className="shrink-0 rounded-full bg-[#F5A623] px-2 py-1 text-[10px] font-semibold leading-none tracking-wide text-[#0A0A0F]">
+                                  {locale === 'tr' ? 'ÖNE ÇIKAN' : 'FEATURED'}
+                                </span>
+                              )}
                             </span>
                             <span className="mt-0.5 grid grid-cols-2 gap-x-2 text-[10px] leading-4 text-white/40">
                               {(locale === 'tr' ? item.featuresTr : item.featuresEn).map((feature) => (
